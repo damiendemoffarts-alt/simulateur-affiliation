@@ -1,276 +1,364 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Wireframes Plan Santé</title>
+<title>Mon plan santé — Partenamut</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<!-- Sora = titres (brandbook) · Source Sans 3 = texte courant (équivalent web de Calibri, utilisé sur partenamut.be) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap">
 <style>
+  /* =====================================================================
+     TOKENS — Brandbook Partenamut + partenamut.be
+     Primaires : #002171 navy · #0D47A1 bleu · #FBBA00 jaune · #FFFFFF
+     Secondaires : #F27360 corail · #24A37F vert · #DCEBF5 bleu clair · #000 · #014F56 pétrole
+     Site : texte #282C36, gris #6F7279, bordures #C9CACD, hover #1368EC, focus #6E91C7, erreur #D82B0C
+     ===================================================================== */
   :root{
-    --shell:#E6E8EA; --shell-2:#DADDE0; --paper:#FFFFFF;
-    --ink:#24282C; --ink-2:#585F66; --muted:#868E96;
-    --line:#BFC5CB; --line-soft:#D8DCE0; --fill:#EDEFF1; --fill-2:#E1E4E7; --note:#4A5158;
+    --navy:#002171; --brand:#0D47A1; --brand-hover:#1368EC; --on-brand:#FFFFFF;
+    --accent:#FBBA00; --accent-soft:#FEF1CC; --on-accent:#002171;
+    --coral:#F27360; --green:#24A37F; --teal:#014F56; --danger:#D82B0C;
+    --tint:#DCEBF5; --tint-2:#F4F8FA; --focus:#6E91C7;
+
+    --shell:#F4F8FA; --shell-2:#FFFFFF; --paper:#FFFFFF;
+    --ink:#002171;          /* titres, valeurs fortes */
+    --body:#282C36;         /* texte courant */
+    --ink-2:#4F535C; --muted:#6F7279;
+    --line:#C9CACD; --line-soft:#E4E7EC; --fill:#F4F8FA; --fill-2:#DCEBF5; --note:#4F535C;
+    --sel-bg:#F3F7FD;       /* fond d'un élément sélectionné */
+    --shadow:0 1px 2px rgba(0,33,113,.08),0 2px 8px rgba(0,33,113,.06);
+    --r-sm:4px; --r-md:8px; --r-lg:12px; --r-pill:999px;
+    --font-head:"Sora",system-ui,sans-serif;
+    --font-body:"Source Sans 3",Calibri,system-ui,-apple-system,"Segoe UI",sans-serif;
     --frame-w:1440px; color-scheme:light;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --shell:#141618; --shell-2:#1B1E21; --paper:#212528;
-      --ink:#E4E7E9; --ink-2:#A7AEB4; --muted:#7D858C;
-      --line:#3D4348; --line-soft:#31363A; --fill:#2A2E32; --fill-2:#32373B; --note:#B3BAC0;
-      color-scheme:dark;
+      --brand:#8FB4F0; --brand-hover:#B3CDF6; --on-brand:#00113A;
+      --accent-soft:#3A3212; --tint:#1B2A5C; --tint-2:#111C42; --focus:#8FB4F0;
+      --shell:#08102B; --shell-2:#0D1738; --paper:#111C42;
+      --ink:#EEF3FB; --body:#DCE3F0; --ink-2:#B4C0D8; --muted:#8E9BB8;
+      --line:#34437A; --line-soft:#243266; --fill:#16224D; --fill-2:#1F2E60; --note:#B4C0D8;
+      --sel-bg:#1A2A5E; --shadow:none; color-scheme:dark;
     }
   }
   :root[data-theme="dark"]{
-    --shell:#141618;--shell-2:#1B1E21;--paper:#212528;--ink:#E4E7E9;--ink-2:#A7AEB4;
-    --muted:#7D858C;--line:#3D4348;--line-soft:#31363A;--fill:#2A2E32;--fill-2:#32373B;--note:#B3BAC0;
-    color-scheme:dark;
+    --brand:#8FB4F0; --brand-hover:#B3CDF6; --on-brand:#00113A;
+    --accent-soft:#3A3212; --tint:#1B2A5C; --tint-2:#111C42; --focus:#8FB4F0;
+    --shell:#08102B; --shell-2:#0D1738; --paper:#111C42;
+    --ink:#EEF3FB; --body:#DCE3F0; --ink-2:#B4C0D8; --muted:#8E9BB8;
+    --line:#34437A; --line-soft:#243266; --fill:#16224D; --fill-2:#1F2E60; --note:#B4C0D8;
+    --sel-bg:#1A2A5E; --shadow:none; color-scheme:dark;
   }
 
   *{box-sizing:border-box}
+  html{scroll-padding-top:env(safe-area-inset-top,0px)}
   body{
-    margin:0;background:var(--shell);color:var(--ink);
-    font-family:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
-    font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;
+    margin:0;background:var(--shell);color:var(--body);
+    font-family:var(--font-body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;
+    padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
   }
+  img{max-width:100%}
+  [hidden]:not([hidden=until-found i]){display:none!important}
+  b,strong{color:var(--ink);font-weight:700}
+  :focus-visible{outline:2px solid var(--focus);outline-offset:2px}
 
-  /* ---------- Shell ---------- */
+  /* ---------- Barre de revue (hors produit) ---------- */
   .bar{
     position:sticky;top:env(safe-area-inset-top,0px);z-index:40;
-    background:var(--shell-2);border-bottom:1px solid var(--line);
+    background:var(--navy);color:#fff;
     display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;padding:10px 16px;
   }
-  .bar h1{font-size:15px;font-weight:700;margin:0;letter-spacing:-.01em}
+  .bar h1{font-family:var(--font-head);font-size:15px;font-weight:600;margin:0;letter-spacing:-.01em;color:#fff}
   .tag{
-    font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
-    color:var(--ink-2);border:1px solid var(--line);border-radius:2px;padding:3px 7px;white-space:nowrap;
+    font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--on-accent);background:var(--accent);border-radius:var(--r-pill);padding:3px 10px;white-space:nowrap;
   }
   .bar .spacer{flex:1 1 auto}
-  .seg{display:flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;flex-wrap:wrap}
+  .seg{display:flex;border:1px solid rgba(255,255,255,.35);border-radius:var(--r-sm);overflow:hidden;flex-wrap:wrap}
   .seg button{
-    font:inherit;font-size:12px;padding:6px 11px;background:transparent;color:var(--ink-2);
-    border:0;border-left:1px solid var(--line);cursor:pointer;white-space:nowrap;
+    font:inherit;font-size:13px;font-weight:600;padding:6px 12px;background:transparent;color:#DCEBF5;
+    border:0;border-left:1px solid rgba(255,255,255,.35);cursor:pointer;white-space:nowrap;
   }
   .seg button:first-child{border-left:0}
-  .seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
-  .seg button:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
+  .seg button[aria-pressed="true"]{background:#fff;color:#002171}
+  .seg button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 
-  .canvas{padding:20px 16px 56px;display:flex;flex-direction:column;align-items:center;gap:10px}
+  .canvas{padding:24px 16px 56px;display:flex;flex-direction:column;align-items:center;gap:12px}
   .frame-meta{
     width:min(100%,var(--frame-w));display:flex;justify-content:space-between;
-    font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--muted);letter-spacing:.06em;
+    font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.04em;
   }
-  .frame{width:min(100%,var(--frame-w));container-type:inline-size;background:var(--paper);border:1px solid var(--line)}
+  .frame{
+    width:min(100%,var(--frame-w));container-type:inline-size;background:var(--paper);
+    border:1px solid var(--line-soft);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow);
+  }
 
   /* ---------- Primitives ---------- */
+  /* Emplacement d'image / QR code : placeholder neutre aux couleurs de la marque */
   .cross{
-    background:var(--fill);border:1px dashed var(--line);
-    background-image:linear-gradient(45deg,transparent 48%,var(--line) 48%,var(--line) 52%,transparent 52%),
-                     linear-gradient(-45deg,transparent 48%,var(--line) 48%,var(--line) 52%,transparent 52%);
+    background:var(--tint-2);border:1.5px dashed var(--line);border-radius:var(--r-md);
+    background-image:linear-gradient(45deg,transparent 48.5%,var(--tint) 48.5%,var(--tint) 51.5%,transparent 51.5%),
+                     linear-gradient(-45deg,transparent 48.5%,var(--tint) 48.5%,var(--tint) 51.5%,transparent 51.5%);
   }
-  .bar-txt{background:var(--fill-2);border-radius:1px;height:9px;display:block}
-  .lbl{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .bar-txt{background:var(--fill-2);border-radius:var(--r-sm);height:9px;display:block}
+  .lbl{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
   .num{font-variant-numeric:tabular-nums}
-  .est{border-bottom:1px dotted var(--muted);cursor:help}
+  .est{border-bottom:1.5px dotted var(--brand);cursor:help}
 
-  /* ---------- App chrome ---------- */
-  .app-top{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--line-soft);flex-wrap:wrap}
-  .logo{width:74px;height:22px}
-  .app-top .t{font-weight:600;font-size:14px}
-  .who{margin-left:auto;display:flex;align-items:center;gap:8px}
-  .avatar{width:24px;height:24px;border-radius:50%}
+  /* ---------- En-tête de l'app ---------- */
+  .app-top{display:flex;align-items:center;gap:14px;padding:14px 24px;border-bottom:1px solid var(--line-soft);flex-wrap:wrap;background:var(--paper)}
+  .logo{height:36px;width:auto;display:block}
+  .logo.inv{display:none}
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .logo{display:none} :root:not([data-theme="light"]) .logo.inv{display:block} }
+  :root[data-theme="dark"] .logo{display:none} :root[data-theme="dark"] .logo.inv{display:block}
+  .app-top .t{font-family:var(--font-head);font-weight:600;font-size:16px;color:var(--ink);padding-left:14px;border-left:1px solid var(--line-soft)}
+  .who{margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .avatar{
+    width:34px;height:34px;border-radius:50%;background:var(--accent);color:#002171;
+    display:grid;place-items:center;font-family:var(--font-head);font-size:12.5px;font-weight:700;
+  }
+  .advisor{display:flex;flex-direction:column;line-height:1.2}
+  .advisor .nm{font-size:14px;font-weight:600;color:var(--ink)}
+  .adv-in{
+    font:inherit;font-size:14px;font-weight:600;color:var(--ink);background:transparent;
+    border:0;border-bottom:1.5px dashed var(--line);border-radius:0;padding:1px 18px 1px 0;width:150px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%236F7279' stroke-width='1.5'%3E%3Cpath d='M11 2.5l2.5 2.5L6 12.5H3.5V10z'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 2px center;background-size:12px;
+  }
+  .adv-in::placeholder{color:var(--danger);font-weight:600;opacity:1}
+  .adv-in:hover{border-bottom-color:var(--brand)}
+  .adv-in:focus-visible{outline:none;border-bottom:2px solid var(--brand);background-color:var(--sel-bg)}
+  .advby{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin:-8px 0 20px;font-size:14.5px;color:var(--ink-2)}
+  .advby .who-chip{display:inline-flex;align-items:center;gap:8px}
+  .advby .avatar{width:28px;height:28px;font-size:11px}
+  .advby .missing{color:var(--danger);font-weight:600}
   .dossier{
-    font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;
-    border:1px solid var(--line);padding:4px 8px;color:var(--ink-2);background:var(--paper);cursor:pointer;
+    font:inherit;font-size:12.5px;font-weight:600;
+    border:1px solid var(--line);border-radius:var(--r-pill);padding:5px 12px;color:var(--brand);background:var(--paper);cursor:pointer;
   }
-  .dossier:disabled{cursor:default;opacity:.55}
-  .dossier:not(:disabled):hover{border-color:var(--ink);color:var(--ink)}
-  .dossier:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-  .cart{font-family:"IBM Plex Mono",monospace;font-size:10.5px;border:1px solid var(--ink);padding:3px 8px}
+  .dossier:disabled{cursor:default;color:var(--muted);opacity:.8}
+  .dossier:not(:disabled):hover{border-color:var(--brand-hover);color:var(--brand-hover);background:var(--sel-bg)}
+  .cart{font-size:12.5px;font-weight:700;color:var(--navy);background:var(--tint);border-radius:var(--r-pill);padding:5px 12px}
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .cart{color:var(--ink)} }
+  :root[data-theme="dark"] .cart{color:var(--ink)}
 
-  .stepper{display:flex;border-bottom:1px solid var(--line-soft);overflow-x:auto}
+  /* ---------- Stepper ---------- */
+  .stepper{display:flex;border-bottom:1px solid var(--line-soft);overflow-x:auto;background:var(--tint-2);padding:0 12px}
   .stepper button{
-    font:inherit;font-size:12px;background:transparent;border:0;cursor:pointer;padding:10px 13px;
-    color:var(--muted);white-space:nowrap;border-bottom:2px solid transparent;display:flex;align-items:center;gap:7px;
+    font:inherit;font-size:14px;font-weight:600;background:transparent;border:0;cursor:pointer;padding:13px 12px 11px;
+    color:var(--muted);white-space:nowrap;border-bottom:3px solid transparent;display:flex;align-items:center;gap:8px;
   }
+  .stepper button:hover{color:var(--brand)}
   .stepper button .n{
-    width:17px;height:17px;border:1px solid var(--line);border-radius:50%;
-    display:grid;place-items:center;font-family:"IBM Plex Mono",monospace;font-size:9.5px;
+    width:24px;height:24px;border:1.5px solid var(--line);border-radius:50%;background:var(--paper);
+    display:grid;place-items:center;font-size:12px;font-weight:700;
   }
-  .stepper button[aria-current="true"]{color:var(--ink);border-bottom-color:var(--ink);font-weight:600}
-  .stepper button[aria-current="true"] .n{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-  .stepper button.done .n{background:var(--fill-2)}
+  .stepper button[aria-current="true"]{color:var(--ink);border-bottom-color:var(--brand)}
+  .stepper button[aria-current="true"] .n{background:var(--brand);color:var(--on-brand);border-color:var(--brand)}
+  .stepper button.done{color:var(--body)}
+  .stepper button.done .n{background:var(--tint);border-color:var(--tint);color:var(--brand)}
 
-  .screen{padding:22px 20px 24px}
-  .screen h2{font-size:19px;margin:0 0 4px;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
-  .screen .sub{color:var(--ink-2);font-size:13.5px;margin:0 0 18px;max-width:64ch}
+  .screen{padding:26px 20px 28px}
+  .screen h2{
+    font-family:var(--font-head);font-size:22px;line-height:1.25;margin:0 0 6px;font-weight:700;
+    letter-spacing:-.015em;color:var(--ink);text-wrap:balance;
+  }
+  .screen h3,.screen h4{font-family:var(--font-head);color:var(--ink)}
+  .screen .sub{color:var(--ink-2);font-size:15px;margin:0 0 22px;max-width:64ch}
 
-  .cols{display:grid;gap:18px;grid-template-columns:1fr}
+  .cols{display:grid;gap:20px;grid-template-columns:1fr}
   @container (min-width:900px){
     .cols.two{grid-template-columns:1.15fr .85fr}
     .cols.cat{grid-template-columns:1fr 300px}
     .cols.wide{grid-template-columns:1fr 1fr}
     .cols.sc{grid-template-columns:290px 1fr}
-    .screen{padding:26px 28px 30px}
+    .screen{padding:32px 32px 34px}
+    .screen h2{font-size:26px}
   }
 
-  .panel{border:1px solid var(--line);padding:16px}
+  .panel{border:1px solid var(--line-soft);border-radius:var(--r-md);padding:18px;background:var(--paper);box-shadow:var(--shadow)}
   .panel > .lbl{display:block;margin-bottom:12px}
 
   /* ---------- Cartes de choix ---------- */
-  .pick2{display:grid;gap:10px;grid-template-columns:1fr}
+  .pick2{display:grid;gap:12px;grid-template-columns:1fr}
   @container (min-width:640px){ .pick2{grid-template-columns:1fr 1fr} }
   .pcard{
-    border:1px solid var(--line);padding:15px;background:var(--paper);cursor:pointer;
-    text-align:left;font:inherit;color:var(--ink);display:flex;flex-direction:column;gap:6px;
+    position:relative;border:1.5px solid var(--line);border-radius:var(--r-md);padding:18px 18px 18px 50px;background:var(--paper);cursor:pointer;
+    text-align:left;font:inherit;color:var(--body);display:flex;flex-direction:column;gap:6px;
+    transition:border-color .12s,background .12s;
   }
-  .pcard[aria-pressed="true"]{border-width:2px;border-color:var(--ink);padding:14px;background:var(--fill)}
-  .pcard:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-  .pcard .h{font-size:14px;font-weight:600}
-  .pcard .p{font-size:12.5px;color:var(--ink-2);line-height:1.45}
+  .pcard::before{
+    content:"";position:absolute;left:18px;top:20px;width:20px;height:20px;border-radius:50%;
+    border:2px solid var(--line);background:var(--paper);box-sizing:border-box;
+  }
+  .pcard:hover{border-color:var(--brand-hover)}
+  .pcard[aria-pressed="true"]{border:2px solid var(--brand);padding:17.5px 17.5px 17.5px 49.5px;background:var(--sel-bg)}
+  .pcard[aria-pressed="true"]::before{border:6px solid var(--brand);left:17.5px;top:19.5px}
+  .pcard .h{font-family:var(--font-head);font-size:16px;font-weight:600;color:var(--ink)}
+  .pcard .p{font-size:14px;color:var(--ink-2);line-height:1.5}
 
   /* ---------- Foyer ---------- */
-  .counter{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line-soft)}
+  .counter{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line-soft)}
   .counter:last-of-type{border-bottom:0}
-  .cbtns{display:flex;align-items:center;gap:6px}
-  .cbtns button{width:26px;height:26px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font:inherit;font-size:15px;line-height:1;cursor:pointer}
-  .cbtns .v{min-width:26px;text-align:center;font-variant-numeric:tabular-nums;font-size:14px}
+  .cbtns{display:flex;align-items:center;gap:8px}
+  .cbtns button{
+    width:36px;height:36px;border:1.5px solid var(--brand);border-radius:50%;background:var(--paper);color:var(--brand);
+    font:inherit;font-size:18px;font-weight:600;line-height:1;cursor:pointer;
+  }
+  .cbtns button:hover{background:var(--sel-bg)}
+  .cbtns .v{min-width:28px;text-align:center;font-variant-numeric:tabular-nums;font-size:17px;font-weight:700;color:var(--ink)}
 
   .plist{display:grid;gap:8px;margin-top:12px}
-  .prow{display:flex;align-items:center;gap:9px;flex-wrap:wrap;border:1px solid var(--line-soft);padding:8px 10px}
+  .prow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border:1px solid var(--line-soft);border-radius:var(--r-md);padding:10px 12px;background:var(--tint-2)}
   .pname{
-    font:inherit;font-size:13px;font-weight:600;width:104px;padding:4px 6px;
-    border:1px solid var(--line-soft);background:var(--fill);color:var(--ink);
+    font:inherit;font-size:14px;font-weight:600;width:116px;padding:6px 9px;
+    border:1px solid var(--line);border-radius:var(--r-sm);background:var(--paper);color:var(--ink);
   }
-  .pname:focus-visible{outline:none;border-color:var(--ink);background:var(--paper)}
+  .pname:focus-visible{outline:2px solid var(--focus);outline-offset:0;border-color:var(--brand)}
   .prow input[type=number]{
-    width:50px;font:inherit;font-size:13px;border:0;border-bottom:1px solid var(--line);
-    background:transparent;color:var(--ink);text-align:center;padding:1px 0;
+    width:56px;font:inherit;font-size:14px;font-weight:600;border:1px solid var(--line);border-radius:var(--r-sm);
+    background:var(--paper);color:var(--ink);text-align:center;padding:5px 4px;
   }
-  .prow input[type=number]:focus-visible{outline:none;border-bottom-color:var(--ink);border-bottom-width:2px}
-  .mini{display:inline-flex;border:1px solid var(--line);vertical-align:middle;width:max-content}
-  .mini button{font:inherit;font-size:11.5px;padding:4px 9px;background:transparent;color:var(--ink-2);border:0;border-left:1px solid var(--line);cursor:pointer;white-space:nowrap}
+  .prow input[type=number]:focus-visible{outline:2px solid var(--focus);outline-offset:0;border-color:var(--brand)}
+  .mini{display:inline-flex;border:1px solid var(--line);border-radius:var(--r-pill);vertical-align:middle;width:max-content;background:var(--paper);overflow:hidden}
+  .mini button{font:inherit;font-size:13px;font-weight:600;padding:6px 12px;background:transparent;color:var(--ink-2);border:0;border-left:1px solid var(--line-soft);cursor:pointer;white-space:nowrap}
   .mini button:first-child{border-left:0}
-  .mini button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
-  .mini button:disabled{opacity:.3;cursor:not-allowed}
-  .warn{border:1px dashed var(--ink);padding:9px 11px;font-size:12.5px;margin-top:10px;background:var(--fill)}
+  .mini button:hover:not(:disabled):not([aria-pressed="true"]){color:var(--brand);background:var(--sel-bg)}
+  .mini button[aria-pressed="true"]{background:var(--brand);color:var(--on-brand)}
+  .mini button:disabled{opacity:.35;cursor:not-allowed}
+  .warn{
+    border:0;border-left:4px solid var(--accent);border-radius:var(--r-sm);padding:10px 13px;font-size:14px;margin-top:12px;
+    background:var(--accent-soft);color:var(--body);
+  }
 
   /* ---------- Filtres ---------- */
-  .filters{border:1px solid var(--line-soft);padding:12px 14px;margin-bottom:14px;display:grid;gap:10px}
-  .frow{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
-  .frow > .lbl{flex:0 0 74px}
-  .search{flex:1 1 180px;display:flex;align-items:center;gap:8px;border:1px solid var(--line);padding:6px 10px;min-width:0}
-  .search input{flex:1;font:inherit;font-size:13px;border:0;background:transparent;color:var(--ink);min-width:0}
+  .filters{border:1px solid var(--line-soft);border-radius:var(--r-md);padding:14px 16px;margin-bottom:16px;display:grid;gap:12px;background:var(--tint-2)}
+  .frow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .frow > .lbl{flex:0 0 80px}
+  .search{flex:1 1 180px;display:flex;align-items:center;gap:8px;border:1px solid #929398;border-radius:var(--r-sm);padding:8px 12px;min-width:0;background:var(--paper)}
+  .search:focus-within{outline:2px solid var(--focus);outline-offset:0;border-color:var(--brand)}
+  .search input{flex:1;font:inherit;font-size:14px;border:0;background:transparent;color:var(--body);min-width:0}
   .search input:focus-visible{outline:none}
-  .chip{font:inherit;font-size:12.5px;padding:6px 11px;border:1px solid var(--line);background:var(--paper);color:var(--ink-2);border-radius:14px;cursor:pointer;white-space:nowrap}
-  .chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-  .chip:disabled{opacity:.35;cursor:not-allowed}
-  .chip:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-  .chip .c{font-family:"IBM Plex Mono",monospace;font-size:10px;opacity:.7;margin-left:5px}
-  .fcount{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.06em;color:var(--muted)}
+  .chip{
+    font:inherit;font-size:14px;font-weight:600;padding:6px 14px;border:1px solid var(--tint);background:var(--tint-2);
+    color:var(--ink-2);border-radius:var(--r-pill);cursor:pointer;white-space:nowrap;
+  }
+  .chip:hover:not(:disabled):not([aria-pressed="true"]){border-color:var(--brand-hover);color:var(--brand)}
+  .chip[aria-pressed="true"]{background:var(--brand);color:var(--on-brand);border-color:var(--brand)}
+  .chip:disabled{opacity:.4;cursor:not-allowed}
+  .chip .c{font-size:12px;font-weight:600;opacity:.75;margin-left:5px}
+  .fcount{font-size:12.5px;font-weight:600;color:var(--muted)}
 
   /* ---------- Cartes avantages ---------- */
-  .gcards{display:grid;gap:10px;grid-template-columns:1fr}
+  .gcards{display:grid;gap:12px;grid-template-columns:1fr}
   @container (min-width:560px){ .gcards{grid-template-columns:repeat(2,1fr)} }
   @container (min-width:1180px){ .gcards{grid-template-columns:repeat(3,1fr)} }
-  .card{display:flex;flex-direction:column;gap:7px;border:1px solid var(--line);padding:13px 14px;background:var(--paper)}
-  .card.on{border-width:2px;border-color:var(--ink);padding:12px 13px;background:var(--fill)}
-  .card.off{opacity:.5;border-style:dashed}
+  .card{display:flex;flex-direction:column;gap:7px;border:1px solid var(--line-soft);border-radius:var(--r-md);padding:15px 16px;background:var(--paper);box-shadow:var(--shadow)}
+  .card.on{border:2px solid var(--brand);padding:14px 15px;background:var(--sel-bg)}
+  .card.off{opacity:.6;border-style:dashed;box-shadow:none;background:var(--tint-2)}
   .ctop{display:flex;align-items:center;gap:8px}
-  .ccat{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
-  .cbadge{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:10px;border:1px solid var(--line);padding:1px 6px;color:var(--ink-2)}
-  .card h4{margin:0;font-size:13.5px;font-weight:600;line-height:1.3;text-wrap:balance}
-  .cv{font-size:21px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1}
-  .cv span{font-size:11.5px;font-weight:400;color:var(--ink-2)}
-  .cd{margin:0;font-size:11.5px;color:var(--ink-2);line-height:1.4}
-  .cfoot{margin-top:auto;padding-top:9px;border-top:1px solid var(--line-soft)}
-  .pils{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+  .ccat{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--brand)}
+  .cbadge{margin-left:auto;font-size:12px;font-weight:700;background:var(--tint);color:var(--navy);border-radius:var(--r-pill);padding:2px 9px}
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .cbadge{color:var(--ink)} }
+  :root[data-theme="dark"] .cbadge{color:var(--ink)}
+  .card h4{margin:0;font-size:15px;font-weight:600;line-height:1.3;text-wrap:balance}
+  .cv{font-family:var(--font-head);font-size:22px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.15}
+  .cv span{font-family:var(--font-body);font-size:13px;font-weight:400;color:var(--ink-2)}
+  .cd{margin:0;font-size:13.5px;color:var(--ink-2);line-height:1.45}
+  .cfoot{margin-top:auto;padding-top:10px;border-top:1px solid var(--line-soft)}
+  .pils{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
   .pil{
-    font:inherit;font-size:11.5px;padding:4px 9px;min-height:28px;border:1px solid var(--line);
-    background:var(--paper);color:var(--ink-2);cursor:pointer;border-radius:13px;
-    max-width:118px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+    font:inherit;font-size:13px;font-weight:600;padding:4px 11px;min-height:32px;border:1px solid var(--line);
+    background:var(--paper);color:var(--ink-2);cursor:pointer;border-radius:var(--r-pill);
+    max-width:128px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
   }
-  .pil[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:600}
-  .pil:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-  .pil.all{border-style:dashed;border-radius:3px}
-  .cwhy{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
-  .side{position:sticky;top:12px;align-self:start}
+  .pil:hover:not([aria-pressed="true"]){border-color:var(--brand-hover);color:var(--brand)}
+  .pil[aria-pressed="true"]{background:var(--brand);color:var(--on-brand);border-color:var(--brand)}
+  .pil.all{border-style:dashed}
+  .cwhy{font-size:12px;font-weight:600;color:var(--muted)}
+  .side{position:sticky;top:64px;align-self:start}
 
   /* ---------- Scénarios ---------- */
-  .sclist{display:grid;gap:7px}
+  .sclist{display:grid;gap:8px}
   .scbtn{
-    font:inherit;text-align:left;border:1px solid var(--line);background:var(--paper);color:var(--ink);
-    padding:11px 12px;cursor:pointer;display:flex;flex-direction:column;gap:3px;
+    font:inherit;text-align:left;border:1px solid var(--line);border-radius:var(--r-md);background:var(--paper);color:var(--body);
+    padding:12px 14px;cursor:pointer;display:flex;flex-direction:column;gap:3px;
   }
-  .scbtn[aria-pressed="true"]{border-width:2px;border-color:var(--ink);padding:10px 11px;background:var(--fill)}
-  .scbtn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-  .scbtn .h{font-size:13px;font-weight:600}
-  .scbtn .p{font-size:11.5px;color:var(--ink-2);line-height:1.35}
-  .scbtn .flag{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.07em;text-transform:uppercase;border:1px solid var(--line);padding:1px 5px;align-self:flex-start;margin-top:3px}
+  .scbtn:hover:not(:disabled){border-color:var(--brand-hover)}
+  .scbtn[aria-pressed="true"]{border:2px solid var(--brand);padding:11px 13px;background:var(--sel-bg)}
+  .scbtn .h{font-family:var(--font-head);font-size:14px;font-weight:600;color:var(--ink)}
+  .scbtn .p{font-size:13px;color:var(--ink-2);line-height:1.4}
+  .scbtn .flag{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:var(--tint);color:var(--brand);border-radius:var(--r-pill);padding:2px 9px;align-self:flex-start;margin-top:4px}
 
-  .story{border:1px solid var(--line-soft);padding:14px;margin-bottom:16px;display:grid;gap:9px}
-  .story .q{font-size:13.5px;line-height:1.55;max-width:70ch;margin:0}
-  .stat4{display:grid;gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);grid-template-columns:1fr 1fr}
+  .story{border:1px solid var(--line-soft);border-radius:var(--r-md);padding:16px;margin-bottom:18px;display:grid;gap:10px;background:var(--tint-2)}
+  .story .q{font-size:15px;line-height:1.55;max-width:70ch;margin:0}
+  .story .conds{margin:0;padding:10px 12px 10px 30px;border-left:3px solid var(--line);background:var(--fill);border-radius:var(--r-sm, 6px);font-size:13px;line-height:1.5;color:var(--ink-2);max-width:70ch}
+  .story .conds li{margin:2px 0}
+  .story .conds .ct{display:block;margin:0 0 4px -18px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);list-style:none}
+  .stat4{display:grid;gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:var(--r-md);overflow:hidden;grid-template-columns:1fr 1fr}
   @container (min-width:760px){ .stat4{grid-template-columns:repeat(4,1fr)} }
-  .stat4 > div{background:var(--paper);padding:11px 12px}
-  .stat4 .k{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:3px}
-  .stat4 .v{font-size:17px;font-weight:600;font-variant-numeric:tabular-nums}
+  .stat4 > div{background:var(--paper);padding:12px 14px}
+  .stat4 .k{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:3px}
+  .stat4 .v{font-family:var(--font-head);font-size:18px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
 
   /* ---------- Saisie d'un devis ---------- */
-  .quote{border:1px solid var(--line);background:var(--paper)}
-  .qtot{padding:13px 14px;border-bottom:1px solid var(--line-soft);display:flex;flex-direction:column;gap:2px}
-  .qtot .k{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-  .qbig{font-size:30px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.05;letter-spacing:-.02em}
-  .qsub{font-size:11.5px;color:var(--ink-2);font-variant-numeric:tabular-nums}
-  .qsrc{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.04em;color:var(--muted);margin-top:4px;line-height:1.5}
+  .quote{border:1px solid var(--line-soft);border-radius:var(--r-md);background:var(--paper);overflow:hidden}
+  .qtot{padding:14px 16px;border-bottom:1px solid var(--line-soft);display:flex;flex-direction:column;gap:2px}
+  .qtot .k{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .qbig{font-family:var(--font-head);font-size:30px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.1;letter-spacing:-.02em}
+  .qsub{font-size:13px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+  .qsrc{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5}
   .qfields{display:grid;gap:1px;background:var(--line-soft);grid-template-columns:1fr}
   @container (min-width:620px){ .qfields{grid-template-columns:1fr 1fr} }
   @container (min-width:1000px){ .qfields{grid-template-columns:repeat(3,1fr)} }
   .qfields.two{grid-template-columns:1fr}
   @container (min-width:520px){ .qfields.two{grid-template-columns:1fr 1fr} }
   .qfields .full{grid-column:1/-1}
-  .qf{background:var(--paper);padding:10px 12px;display:flex;flex-direction:column;gap:5px}
+  .qf{background:var(--paper);padding:11px 14px;display:flex;flex-direction:column;gap:5px}
   .qf.dim{opacity:.5}
-  .qf.ed{background:var(--fill)}
-  .qk{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:5px}
-  .edot{color:var(--ink);font-size:8px}
+  .qf.ed{background:var(--accent-soft)}
+  .qk{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .edot{color:var(--accent);font-size:10px}
   .qin{display:flex;align-items:baseline;gap:6px}
   .qin input{
-    font:inherit;font-size:17px;font-weight:600;font-variant-numeric:tabular-nums;width:88px;
-    border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--ink);padding:1px 0;
+    font:inherit;font-size:17px;font-weight:700;font-variant-numeric:tabular-nums;width:100px;
+    border:1px solid var(--line);border-radius:var(--r-sm);background:var(--paper);color:var(--ink);padding:4px 8px;
   }
-  .qin input:focus-visible{outline:none;border-bottom-color:var(--ink);border-bottom-width:2px}
-  .qin input:disabled{color:var(--muted)}
-  .qu{font-size:11.5px;color:var(--ink-2)}
-  .qh{font-size:10.5px;color:var(--muted);line-height:1.4}
-  .qbar{padding:10px 12px;border-top:1px solid var(--line-soft);background:var(--fill);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-  .qstate{font-size:12px;color:var(--ink-2);flex:1 1 220px}
+  .qin input:focus-visible{outline:2px solid var(--focus);outline-offset:0;border-color:var(--brand)}
+  .qin input:disabled{color:var(--muted);background:var(--tint-2)}
+  .qu{font-size:13px;color:var(--ink-2)}
+  .qh{font-size:12px;color:var(--muted);line-height:1.4}
+  .qbar{padding:11px 14px;border-top:1px solid var(--line-soft);background:var(--tint-2);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .qstate{font-size:13.5px;color:var(--ink-2);flex:1 1 220px}
 
   /* ---------- Avertissement de simulation ---------- */
   .simwarn{
-    border:2px solid var(--ink);padding:11px 14px;margin:0 0 18px;
-    display:flex;gap:11px;align-items:flex-start;background:var(--fill);
+    border:0;border-left:4px solid var(--brand);border-radius:var(--r-sm);padding:12px 16px;margin:0 0 20px;
+    display:flex;gap:12px;align-items:flex-start;background:var(--tint);
   }
   .simwarn .tagx{
-    font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
-    border:1px solid var(--ink);padding:3px 7px;white-space:nowrap;flex:0 0 auto;font-weight:500;
+    font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    background:var(--brand);color:var(--on-brand);border-radius:var(--r-pill);padding:3px 10px;white-space:nowrap;flex:0 0 auto;
   }
-  .simwarn p{margin:0;font-size:12.5px;line-height:1.55;color:var(--ink-2)}
+  .simwarn p{margin:0;font-size:14px;line-height:1.55;color:var(--body)}
   .simwarn b{color:var(--ink)}
   /* Rappel de règle produit destiné au conseiller, pas au prospect */
   .rulebox{
-    border:1px dashed var(--line);border-left:3px solid var(--ink);padding:11px 14px;margin:0 0 18px;
-    display:flex;gap:11px;align-items:flex-start;
+    border:1px dashed var(--line);border-left:4px solid var(--teal);border-radius:var(--r-sm);padding:12px 16px;margin:0 0 20px;
+    display:flex;gap:12px;align-items:flex-start;background:var(--paper);
   }
   .rulebox .tagx{
-    font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
-    color:var(--muted);white-space:nowrap;flex:0 0 auto;padding-top:1px;
+    font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--teal);white-space:nowrap;flex:0 0 auto;padding-top:2px;
   }
-  .rulebox p{margin:0;font-size:12.5px;line-height:1.55;color:var(--ink-2)}
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .rulebox{border-left-color:var(--green)} :root:not([data-theme="light"]) .rulebox .tagx{color:#6FD3B4} }
+  :root[data-theme="dark"] .rulebox{border-left-color:var(--green)} :root[data-theme="dark"] .rulebox .tagx{color:#6FD3B4}
+  .rulebox p{margin:0;font-size:14px;line-height:1.55;color:var(--ink-2)}
   .rulebox b{color:var(--ink)}
   .yearnote{
-    font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.05em;color:var(--muted);
-    border:1px solid var(--line);padding:8px 11px;margin-top:14px;line-height:1.6;
+    font-size:12.5px;color:var(--muted);background:var(--tint-2);
+    border:1px solid var(--line-soft);border-radius:var(--r-sm);padding:10px 13px;margin-top:16px;line-height:1.55;
   }
 
-  .fcards{display:grid;gap:10px;grid-template-columns:1fr}
+  .fcards{display:grid;gap:12px;grid-template-columns:1fr}
   @container (min-width:700px){ .fcards{grid-template-columns:repeat(2,1fr)} }
   @container (min-width:1080px){ .fcards{grid-template-columns:repeat(4,1fr)} }
   .fcards.three{grid-template-columns:1fr}
@@ -278,140 +366,189 @@
   .fcards.duo{grid-template-columns:1fr}
   @container (min-width:620px){ .fcards.duo{grid-template-columns:1fr 1fr} }
 
-  /* Échelle d'ancienneté — lecture, pas offre : pas de bordure de carte, pas d'état sélectionné */
-  .ladder{margin:14px 0 0;padding:14px 16px;border:0;border-top:1px solid var(--line);background:var(--fill)}
+  /* Échelle d'ancienneté — lecture, pas offre */
+  .ladder{margin:16px 0 0;padding:16px 18px;border:0;border-radius:var(--r-md);background:var(--tint-2)}
   .ladder figcaption{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;margin-bottom:10px}
-  .ladder .lscale{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.06em;color:var(--muted);margin-left:auto}
-  .lrow{display:grid;grid-template-columns:104px 1fr 76px;gap:10px;align-items:center;padding:4px 0;font-size:12.5px;color:var(--ink-2)}
-  .lrow .lbar{height:14px;background:var(--paper);border:1px solid var(--line-soft);position:relative;display:block}
-  .lrow .lbar i{position:absolute;inset:0 auto 0 0;background:var(--fill-2);border-right:1px solid var(--line);display:block}
-  .lrow b{text-align:right;font-weight:500;color:var(--ink)}
-  .lrow.cur{color:var(--ink);font-weight:600}
-  .lrow.cur .lbar i{background:var(--line)}
-  .ladder .lnote{margin:11px 0 0;font-size:11.5px;color:var(--muted);line-height:1.5}
+  .ladder .lscale{font-size:12px;font-weight:600;color:var(--muted);margin-left:auto}
+  .lrow{display:grid;grid-template-columns:110px 1fr 80px;gap:10px;align-items:center;padding:4px 0;font-size:14px;color:var(--ink-2)}
+  .lrow .lbar{height:12px;background:var(--paper);border-radius:var(--r-pill);position:relative;display:block;overflow:hidden;border:1px solid var(--line-soft)}
+  .lrow .lbar i{position:absolute;inset:0 auto 0 0;background:var(--tint);border-radius:var(--r-pill);display:block}
+  .lrow b{text-align:right;font-weight:600;color:var(--ink)}
+  .lrow.cur{color:var(--ink);font-weight:700}
+  .lrow.cur .lbar i{background:var(--brand)}
+  .ladder .lnote{margin:12px 0 0;font-size:13px;color:var(--muted);line-height:1.5}
   .fcard{
-    border:1px solid var(--line);padding:14px;background:var(--paper);cursor:pointer;
-    text-align:left;font:inherit;color:var(--ink);display:flex;flex-direction:column;gap:9px;
+    border:1px solid var(--line);border-radius:var(--r-md);padding:16px;background:var(--paper);cursor:pointer;
+    text-align:left;font:inherit;color:var(--body);display:flex;flex-direction:column;gap:9px;box-shadow:var(--shadow);
   }
-  .fcard[aria-pressed="true"]{border-width:2px;border-color:var(--ink);padding:13px}
-  .fcard.none{border-style:dashed;background:var(--fill)}
-  .fcard:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-  .fcard .nm{font-size:13.5px;font-weight:600;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-  .fcard .rest{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.05}
-  .fcard .restl{font-size:11.5px;color:var(--ink-2);margin-top:-4px}
-  .fcard .prime{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--ink-2);border-top:1px solid var(--line-soft);padding-top:8px;margin-top:auto;line-height:1.5}
-  .fcard .best{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--ink);padding:1px 5px}
-  .brk{display:grid;gap:4px;font-size:11.5px}
+  .fcard:hover:not(:disabled){border-color:var(--brand-hover)}
+  .fcard[aria-pressed="true"]{border:2px solid var(--brand);padding:15px;background:var(--sel-bg)}
+  .fcard.none{border-style:dashed;background:var(--tint-2);box-shadow:none}
+  .fcard .nm{font-family:var(--font-head);font-size:14.5px;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .fcard .rest{font-family:var(--font-head);font-size:27px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.1}
+  .fcard .restl{font-size:13px;color:var(--ink-2);margin-top:-4px}
+  .fcard .prime{font-size:13px;color:var(--ink-2);border-top:1px solid var(--line-soft);padding-top:9px;margin-top:auto;line-height:1.5}
+  .fcard .best{
+    font-family:var(--font-body);font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    background:var(--accent);color:var(--on-accent);border-radius:var(--r-pill);padding:2px 9px;
+  }
+  .brk{display:grid;gap:4px;font-size:13px}
   .brk div{display:flex;justify-content:space-between;gap:8px;color:var(--ink-2)}
-  .brk b{font-variant-numeric:tabular-nums;color:var(--ink);font-weight:500}
+  .brk b{font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600}
   .brk .amb{border-top:1px dotted var(--line);padding-top:4px;margin-top:2px}
 
-  /* ---------- Clôture de vente ---------- */
-  .close{border:1px solid var(--ink);border-width:2px;padding:16px;margin-top:20px}
-  .close h3{margin:0 0 4px;font-size:15px;font-weight:600}
-  .close p{margin:0 0 14px;font-size:12.5px;color:var(--ink-2);max-width:66ch}
+  /* ---------- Clôture de vente (moment clé : monogramme en accent) ---------- */
+  .close{
+    position:relative;overflow:hidden;
+    border:0;border-radius:var(--r-lg);padding:20px 20px 22px;margin-top:24px;background:var(--tint);
+  }
+  .close::after{
+    content:"";position:absolute;right:-18px;top:-18px;width:96px;height:96px;pointer-events:none;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M12 88A76 76 0 0 0 88 12' fill='none' stroke='%23FBBA00' stroke-width='16'/%3E%3C/svg%3E") no-repeat center/contain;
+  }
+  .close > *{position:relative;z-index:1}
+  .close h3{margin:0 0 6px;font-size:18px;font-weight:700;padding-right:70px}
+  .close p{margin:0 0 16px;font-size:14.5px;color:var(--body);max-width:66ch}
   .close .acts{display:flex;gap:10px;flex-wrap:wrap}
-  .subtable{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
-  .subtable th{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:400;text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}
-  .subtable td{padding:9px 8px;border-bottom:1px solid var(--line-soft);vertical-align:middle;white-space:nowrap}
+  .close .swrap{background:var(--paper);border-radius:var(--r-md);padding:4px 12px}
+  .subtable{width:100%;border-collapse:collapse;font-size:14px;margin-top:4px}
+  .subtable th{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:9px 8px;border-bottom:1px solid var(--line)}
+  .subtable td{padding:10px 8px;border-bottom:1px solid var(--line-soft);vertical-align:middle;white-space:nowrap}
   .subtable td.n{text-align:right;font-variant-numeric:tabular-nums}
-  /* une colonne absorbe l'espace restant ; les autres collent à leur contenu */
   .subtable .grow{width:100%;white-space:normal}
-  .subtable tfoot td{border-bottom:0;border-top:1px solid var(--line);font-weight:600}
+  .subtable tfoot td{border-bottom:0;border-top:2px solid var(--brand);font-weight:700;color:var(--ink)}
   .swrap{overflow-x:auto}
-  .refused{border:1px dashed var(--line);padding:12px 14px;margin-top:20px;font-size:13px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .refused{
+    border:1px dashed var(--line);border-radius:var(--r-md);padding:14px 16px;margin-top:24px;font-size:14.5px;
+    display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:var(--tint-2);
+  }
 
   /* ---------- Récap ---------- */
-  .balance{display:grid;gap:14px;grid-template-columns:1fr}
+  .balance{display:grid;gap:16px;grid-template-columns:1fr}
   @container (min-width:900px){ .balance{grid-template-columns:1fr 1fr} }
-  .bal{border:1px solid var(--line);padding:18px;display:flex;flex-direction:column;gap:4px}
-  .bal.hi{border-width:2px;border-color:var(--ink)}
-  .perday{border:1px solid var(--line-soft);background:var(--fill);padding:14px 16px;margin-top:14px;font-size:13.5px;line-height:1.55}
+  .bal{border:1px solid var(--line-soft);border-radius:var(--r-lg);padding:20px;display:flex;flex-direction:column;gap:4px;background:var(--paper);box-shadow:var(--shadow)}
+  /* Carte « ce que vous récupérez » : navy de marque, tokens inversés localement */
+  .bal.hi{
+    position:relative;overflow:hidden;border:0;background:#002171;
+    --ink:#FFFFFF; --body:#FFFFFF; --ink-2:#DCEBF5; --muted:#B9C8EA; --line-soft:rgba(255,255,255,.18);
+    color:#fff;
+  }
+  .bal.hi::after{
+    content:"";position:absolute;right:-24px;bottom:-24px;width:140px;height:140px;pointer-events:none;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M12 88A76 76 0 0 0 88 12' fill='none' stroke='%23FBBA00' stroke-width='14'/%3E%3C/svg%3E") no-repeat center/contain;
+  }
+  .bal.hi > *{position:relative;z-index:1}
+  .bal.hi .big{color:#FBBA00}
+  .perday{border:0;border-radius:var(--r-md);background:var(--tint);padding:16px 18px;margin-top:16px;font-size:15px;line-height:1.55}
   .perday b{font-variant-numeric:tabular-nums}
-  .netrow{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 16px}
+  .netrow{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 18px}
   .netrow > div{display:flex;flex-direction:column;gap:2px}
-  .netrow b{font-size:19px;font-weight:700}
-  .netrow .op{font-size:17px;color:var(--muted);padding-bottom:2px;font-weight:400}
-  .netrow > div:last-child b{border-bottom:2px solid var(--ink);padding-bottom:2px}
+  .netrow b{font-family:var(--font-head);font-size:20px;font-weight:700}
+  .netrow .op{font-size:20px;color:var(--muted);padding-bottom:2px;font-weight:400}
+  .netrow > div:last-child b{border-bottom:3px solid var(--accent);padding-bottom:2px}
 
   /* Impression : seul le contenu de l'écran courant part au PDF */
   @media print{
     body{background:#fff;color:#000}
-    .bar,.frame-meta,.stepper,.app-bot,.notes,.app-top .who,.close .acts,#pdfBtn{display:none!important}
+    .bar,.frame-meta,.stepper,.app-bot,.notes,.app-top .who,.close .acts,#pdfBtn,.advby .missing{display:none!important}
     .canvas{padding:0}
-    .frame{border:0;width:100%}
+    .frame{border:0;width:100%;box-shadow:none;border-radius:0}
     .screen{padding:0}
     .side{position:static}
     .tw{max-height:none;overflow:visible}
-    .panel,.bal,.result,.card{break-inside:avoid}
+    .panel,.bal,.result,.card{break-inside:avoid;box-shadow:none}
+    .bal.hi,.close,.perday,.simwarn{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   }
 
   /* ---------- Résultats ---------- */
-  .result{border:1px solid var(--line);padding:18px}
-  .big{font-size:40px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.05}
+  .result{border:1px solid var(--line-soft);border-radius:var(--r-lg);padding:20px;background:var(--paper);box-shadow:var(--shadow)}
+  .big{font-family:var(--font-head);font-size:40px;font-weight:700;color:var(--ink);letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1}
+  .big span{font-family:var(--font-body)}
   .big.sm{font-size:28px}
-  .vs{display:grid;gap:14px;margin-top:16px}
-  .vsrow{display:grid;grid-template-columns:120px 1fr auto;gap:10px;align-items:center}
-  .track{height:20px;background:var(--fill);border:1px solid var(--line-soft);position:relative}
-  .track i{position:absolute;inset:0 auto 0 0;background:var(--fill-2);border-right:1px solid var(--line);display:block}
-  .track.solid i{background:var(--line)}
+  .vs{display:grid;gap:14px;margin-top:18px}
+  .vsrow{display:grid;grid-template-columns:130px 1fr auto;gap:10px;align-items:center}
+  .vsrow b{font-family:var(--font-head)}
+  .track{height:16px;background:var(--tint-2);border-radius:var(--r-pill);position:relative;overflow:hidden}
+  .track i{position:absolute;inset:0 auto 0 0;background:var(--coral);border-radius:var(--r-pill);display:block}
+  .track.solid i{background:var(--brand)}
 
-  table{width:100%;border-collapse:collapse;font-size:13px}
-  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line-soft)}
-  th{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:400}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line-soft)}
+  th{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  thead th{background:var(--tint-2);position:sticky;top:0}
   td.n,th.n{text-align:right}
   td.n{font-variant-numeric:tabular-nums}
-  .tw{overflow-x:auto;max-height:360px;overflow-y:auto}
-  .cmp td:first-child{font-size:12.5px}
+  .tw{overflow-x:auto;max-height:360px;overflow-y:auto;border-radius:var(--r-sm)}
+  .cmp td:first-child{font-size:13.5px}
+  details summary{color:var(--brand)}
 
-  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
 
-  .toggle-row{display:flex;align-items:flex-start;gap:11px;padding:12px 0;border-top:1px solid var(--line-soft)}
-  .sw{width:36px;height:20px;border:1px solid var(--line);border-radius:10px;background:var(--fill);position:relative;flex:0 0 auto;cursor:pointer;padding:0}
-  .sw::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:var(--line);transition:transform .12s}
-  .sw[aria-pressed="true"]{background:var(--ink);border-color:var(--ink)}
-  .sw[aria-pressed="true"]::after{background:var(--paper);transform:translateX(16px)}
-  .sw:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-  .sw:disabled{opacity:.3;cursor:not-allowed}
-  .toggle-row .tt{font-size:13.5px;font-weight:500}
-  .toggle-row .td{font-size:12px;color:var(--ink-2)}
+  .toggle-row{display:flex;align-items:flex-start;gap:12px;padding:13px 0;border-top:1px solid var(--line-soft)}
+  .sw{width:44px;height:24px;border:0;border-radius:var(--r-pill);background:#929398;position:relative;flex:0 0 auto;cursor:pointer;padding:0;transition:background .12s}
+  .sw::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .12s}
+  .sw[aria-pressed="true"]{background:var(--brand)}
+  .sw[aria-pressed="true"]::after{transform:translateX(20px);background:var(--paper)}
+  .sw[style*="width:30px"]::after{width:11px;height:11px;top:3px}
+  .sw[style*="width:30px"][aria-pressed="true"]::after{transform:translateX(13px)}
+  .sw:disabled{opacity:.35;cursor:not-allowed}
+  .toggle-row .tt{font-size:15px;font-weight:600;color:var(--ink)}
+  .toggle-row .td{font-size:13.5px;color:var(--ink-2)}
 
   .tl{display:grid;margin-top:6px;padding:0}
-  .tl li{list-style:none;display:grid;grid-template-columns:22px 1fr;gap:12px;padding-bottom:16px;position:relative}
-  .tl li::before{content:"";position:absolute;left:10px;top:20px;bottom:0;width:1px;background:var(--line-soft)}
+  .tl li{list-style:none;display:grid;grid-template-columns:28px 1fr;gap:12px;padding-bottom:18px;position:relative}
+  .tl li::before{content:"";position:absolute;left:13px;top:28px;bottom:2px;width:2px;background:var(--tint)}
   .tl li:last-child{padding-bottom:0}
   .tl li:last-child::before{display:none}
-  .tl .d{width:21px;height:21px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;font-family:"IBM Plex Mono",monospace;font-size:9.5px;background:var(--paper)}
-  .tl .h{font-size:13.5px;font-weight:500}
-  .tl .p{font-size:12.5px;color:var(--ink-2)}
+  .tl .d{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:700;background:var(--tint);color:var(--brand)}
+  .tl .h{font-size:15px;font-weight:600;color:var(--ink)}
+  .tl .p{font-size:14px;color:var(--ink-2)}
 
-  .app-bot{display:flex;align-items:center;gap:12px;padding:14px 20px;border-top:1px solid var(--line-soft);background:var(--fill)}
-  .btn{font:inherit;font-size:13.5px;padding:9px 18px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
-  .btn.pri{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:600}
-  .btn:disabled{opacity:.4;cursor:not-allowed}
-  .btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-  .app-bot .spacer{flex:1 1 auto}
-
-  /* ---------- Annotations ---------- */
-  .anno-mark{
-    display:inline-grid;place-items:center;width:17px;height:17px;border-radius:50%;
-    border:1px solid var(--ink);color:var(--ink);background:var(--paper);
-    font-family:"IBM Plex Mono",monospace;font-size:9.5px;vertical-align:middle;margin-left:6px;
+  .app-bot{display:flex;align-items:center;gap:12px;padding:14px 24px;border-top:1px solid var(--line-soft);background:var(--paper)}
+  .btn{
+    font:inherit;font-size:15px;font-weight:600;padding:10px 20px;border:1.5px solid var(--brand);border-radius:var(--r-sm);
+    background:var(--paper);color:var(--brand);cursor:pointer;letter-spacing:-.01em;transition:background .12s,border-color .12s,color .12s;
   }
-  .notes{width:min(100%,var(--frame-w));border:1px dashed var(--line);background:var(--shell-2);padding:16px 18px}
-  .notes h3{margin:0 0 10px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-family:"IBM Plex Mono",monospace;font-weight:400}
-  .notes ol{margin:0;padding-left:0;list-style:none;display:grid;gap:9px}
-  .notes li{display:grid;grid-template-columns:20px 1fr;gap:10px;font-size:13px;color:var(--note);line-height:1.5}
-  .notes li b{color:var(--ink);font-weight:600}
-  .src{width:min(100%,var(--frame-w));font-size:12px;color:var(--muted);line-height:1.6;border-top:1px solid var(--line);padding-top:12px}
-  .src a{color:inherit}
+  .btn:hover:not(:disabled){border-color:var(--brand-hover);color:var(--brand-hover);background:var(--sel-bg)}
+  .btn.pri{background:var(--brand);color:var(--on-brand);border-color:var(--brand)}
+  .btn.pri:hover:not(:disabled){background:var(--brand-hover);border-color:var(--brand-hover);color:var(--on-brand)}
+  .btn:disabled{color:var(--muted);background:var(--fill);border-color:var(--fill);cursor:not-allowed}
+  .app-bot .spacer{flex:1 1 auto}
+  .app-bot .lbl{text-transform:none;letter-spacing:0;font-size:13px;font-weight:600}
 
+  /* ---------- Annotations (hors produit) ---------- */
+  .anno-mark{
+    display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;
+    background:var(--accent);color:#002171;
+    font-family:var(--font-body);font-size:11px;font-weight:700;vertical-align:middle;margin-left:6px;letter-spacing:0;text-transform:none;
+  }
+  .notes{width:min(100%,var(--frame-w));border:1px solid var(--line-soft);border-left:4px solid var(--accent);border-radius:var(--r-md);background:var(--paper);padding:18px 20px}
+  .notes h3{margin:0 0 12px;font-family:var(--font-head);font-size:14px;font-weight:600;color:var(--ink)}
+  .notes ol{margin:0;padding-left:0;list-style:none;display:grid;gap:10px}
+  .notes li{display:grid;grid-template-columns:24px 1fr;gap:10px;font-size:14px;color:var(--note);line-height:1.5}
+  .notes li b{color:var(--ink);font-weight:700}
+  .src{width:min(100%,var(--frame-w));font-size:13px;color:var(--muted);line-height:1.6;border-top:1px solid var(--line-soft);padding-top:14px}
+  .src a{color:var(--brand)}
+  .src strong{color:var(--ink)}
+
+  @media (max-width:600px){
+    .app-top{padding:12px 16px}
+    .app-top .t{display:none}
+    .app-bot{padding:12px 16px}
+    .app-bot .lbl{display:none}
+  }
+
+  /* Sélectionné + survol : le texte reste lisible (blanc sur bleu) */
+  .chip[aria-pressed="true"]:hover:not(:disabled),
+  .pil[aria-pressed="true"]:hover,
+  .mini button[aria-pressed="true"]:hover:not(:disabled),
+  .seg button[aria-pressed="true"]:hover{filter:brightness(1.12)}
+  .chip[aria-pressed="true"],.pil[aria-pressed="true"],.mini button[aria-pressed="true"]{color:var(--on-brand)}
   @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 </style>
-
 <header class="bar">
   <h1>Mon plan santé</h1>
-  <span class="tag">Wireframe low-fi · v0.5</span>
+  <span class="tag">Maquette UI · v0.6</span>
   <span class="spacer"></span>
   <div class="seg" role="group" aria-label="Format d'écran">
     <button type="button" id="dTab" aria-pressed="false">Tablette 1024</button>
@@ -430,13 +567,14 @@
 
   <div class="frame">
     <div class="app-top">
-      <div class="logo cross" aria-hidden="true"></div>
+      <img class="logo" alt="Mutualité Partenamut" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTU1IiBoZWlnaHQ9IjQ0IiB2aWV3Qm94PSIwIDAgMTU1IDQ0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcDBfMV83MCkiPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTYyLjEyMTQgMjcuNTc4VjI1LjA3NjJDNjYuMTY3IDI1LjA3NjIgNjkuNDU4MiAyMS43NCA2OS40NTgyIDE3LjYzOTFINzEuOTI2MUM3MS45MjYxIDIzLjExOTUgNjcuNTI3OSAyNy41NzggNjIuMTIxNCAyNy41NzhaIiBmaWxsPSIjRUZBNzBGIi8+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNNjkuMzA1OCAyNy42MjcxQzY4Ljc3MTQgMzAuMTMxNyA2Ni43Nzk2IDMyLjUxMTUgNjMuODgyMiAzMy43MjYzQzU5LjYwOTQgMzUuNTE3NiA1NC45NjQyIDM0LjEwOTMgNTMuNTI2NyAzMC41ODYzQzUyLjA4OTQgMjcuMDYzNSA1NC4zOTYzIDIyLjc0MDQgNTguNjY4NyAyMC45NDkzQzU5LjgyMTUgMjAuNDY1OSA2MS4wMDEgMjAuMjE3NyA2Mi4xMzc5IDIwLjE3ODhWMjAuMTU0NlYxNy42ODE5VjE3LjYzOTdDNjEuODgzNSAxNy42MDU0IDYxLjYzMzggMTcuNTUgNjEuMzkyMiAxNy40NzAxQzYwLjQ1NTMgMTcuMTYwOCA1OS43NTUxIDE2LjUzOSA1OS40MjA2IDE1LjcxODhDNTguNzAwNCAxMy45NTQzIDU5Ljg1OTYgMTEuNzg3MyA2Mi4wMDQgMTAuODg4MkM2Mi42MzczIDEwLjYyMjggNjMuMjg2MyAxMC40OTcgNjMuOTA1NCAxMC40OTdDNjUuMzg0MSAxMC40OTcgNjYuNjkyIDExLjIxMzkgNjcuMTk5MSAxMi40NTc3QzY3LjQ2NTYgMTMuMTEwNCA2Ny40NzYyIDEzLjgzOTkgNjcuMjQ1MiAxNC41NTlINjkuNzkwMkM2OS45Nzc1IDEzLjUyMTYgNjkuODc2NiAxMi40NzQ3IDY5LjQ3OTcgMTEuNTAxNkM2OC4yMzk2IDguNDYyMzQgNjQuNDYzMyA3LjE1MDE5IDYxLjA2MDggOC41NzYzOEM1Ny42NTg4IDEwLjAwMjcgNTUuODk5OSAxMy42MzU4IDU3LjEzOTkgMTYuNjc0OUM1Ny40MDkxIDE3LjMzNDYgNTcuNzk3NSAxNy45MjE0IDU4LjI4NjkgMTguNDE3OUM1OC4wOTkxIDE4LjQ4NjQgNTcuOTExOSAxOC41NTkzIDU3LjcyNTUgMTguNjM3NUM1Mi4xOTU3IDIwLjk1NTkgNDkuMjg4OSAyNi43NDUyIDUxLjI0NiAzMS41NDI0QzUyLjY1MjMgMzQuOTg4NiA1Ni4xOTIgMzcgNjAuMTI0MSAzN0M2MS42NjU4IDM3IDYzLjI2NzcgMzYuNjkwOCA2NC44MjUxIDM2LjAzODFDNjguNjg1MyAzNC40MTk3IDcxLjI2NDUgMzEuMTEgNzEuODA2MiAyNy42MjcxSDY5LjMwNThaIiBmaWxsPSIjMTE1OEJGIi8+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMjcuNjcxNyAyMi44MzYyQzI3LjMxNTIgMjMuNjM3OCAyNi43NDYxIDI0LjMyMzQgMjYuMDI3NSAyNC44MTYzQzI1LjIzNiAyNS4zMjggMjQuMzEwMSAyNS41ODU1IDIzLjM3MTggMjUuNTU0N0MyMi40Mjg2IDI1LjU3ODkgMjEuNDk5NCAyNS4zMjE1IDIwLjY5OTMgMjQuODE0OEMxOS45NTcyIDI0LjMyODUgMTkuMzYzNSAyMy42NDI1IDE4Ljk4NDMgMjIuODMzNUMxOC41ODYxIDIxLjk4NzcgMTguMzgzMSAyMS4wNjA5IDE4LjM5MDggMjAuMTIzN0MxOC4zODAxIDE5LjE4MTkgMTguNTgzMSAxOC4yNTAxIDE4Ljk4MzkgMTcuNDAwM0MxOS4zNjY2IDE2LjU5NzMgMTkuOTYwMyAxNS45MTY5IDIwLjY5OTMgMTUuNDMzMkMyMS40OTk0IDE0LjkyNjkgMjIuNDI4NiAxNC42Njk3IDIzLjM3MTggMTQuNjkzN0MyNC4zMTAxIDE0LjY2MjkgMjUuMjM1OCAxNC45MjA0IDI2LjAyNzUgMTUuNDMyMUMyNi43NDMyIDE1LjkyMTggMjcuMzEyMSAxNi42MDE5IDI3LjY3MTcgMTcuMzk3OEMyOC4wNTQ2IDE4LjI1MzUgMjguMjQ3NCAxOS4xODQyIDI4LjIzNjggMjAuMTIzN0MyOC4yNDQ2IDIxLjA1OTEgMjguMDUxOCAyMS45ODUxIDI3LjY3MTcgMjIuODM3NVYyMi44MzYyWk0yOC4xMjE1IDE0Ljc0MzVDMjcuNjA1MiAxNC4wODM1IDI2Ljk2MDYgMTMuNTM4IDI2LjIyNzkgMTMuMTQxMkMyNS4yNTUzIDEyLjY0MDEgMjQuMTc0OCAxMi4zOTI0IDIzLjA4NCAxMi40MjA1QzIxLjc1ODQgMTIuMzkyIDIwLjQ1MjkgMTIuNzUwNiAxOS4zMjI5IDEzLjQ1MzdDMTguMjU4NiAxNC4xMzQ1IDE3LjM5NzIgMTUuMDk1NiAxNi44MzAxIDE2LjIzNDVDMTYuMjMyOSAxNy40NDA3IDE1LjkzMDIgMTguNzc0NCAxNS45NDczIDIwLjEyMzdDMTUuOTMzNiAyMS40NjgxIDE2LjIzNiAyMi43OTY1IDE2LjgyOTggMjMuOTk4NkMxNy4zOTM5IDI1LjE0MzUgMTguMjU1OSAyNi4xMTAzIDE5LjMyMjkgMjYuNzk0NEMyMC40NTI5IDI3LjQ5NzQgMjEuNzU4MyAyNy44NTYxIDIzLjA4NCAyNy44Mjc3QzI0LjE3NDggMjcuODU2MSAyNS4yNTUzIDI3LjYwODYgMjYuMjI3OSAyNy4xMDc0QzI2Ljk1NjUgMjYuNzEzNSAyNy42MDAyIDI2LjE3NTggMjguMTIxMSAyNS41MjYyVjI3LjYzMzlIMzAuNTY2VjEyLjM0NTRIMjguMTIxMUwyOC4xMjE1IDE0Ljc0MzVaIiBmaWxsPSIjMUIxRjU1Ii8+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMzguOTQ1NCAxMi44ODg4QzM4LjMzNjEgMTMuMTYzOCAzNy43Nzk1IDEzLjU0NTQgMzcuMzAwOCAxNC4wMTYzQzM2LjkwODggMTQuNDAwOCAzNi41NzQgMTQuODQxNyAzNi4zMDc1IDE1LjMyNDVDMzYuMjM3NyAxNS40NTcgMzYuMTc0OCAxNS41ODE2IDM2LjExODggMTUuNjk4M1YxMi4zNDU0SDMzLjY3NFYyNy42MzM5SDM2LjExODhWMjEuMDA0OUMzNi4xMTM3IDE5Ljk3OTggMzYuMzIxMyAxOC45NjUzIDM2LjcyODkgMTguMDI3MUMzNy4xMTA3IDE3LjEzMzQgMzcuNzEzNCAxNi4zNTQ3IDM4LjQ3ODcgMTUuNzY2MkMzOS4yNjIgMTUuMTgxMyA0MC4yMTQzIDE0Ljg3NjYgNDEuMTg2OSAxNC45SDQxLjU4NTFWMTIuNDIxN0g0MS4zMDJDNDAuNDkyNCAxMi40MDI2IDM5LjY4ODQgMTIuNTYyIDM4Ljk0NTQgMTIuODg4OFoiIGZpbGw9IiMxQjFGNTUiLz4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik00OC40NDg4IDguMDI5MjFINDYuMDAzNlYxMi4zNDUxSDQ0LjAzODNWMTQuNTU5N0g0Ni4wMDM2VjI3LjYzMzZINDguNDQ4OFYxNC41NTk3SDUxLjc3NDVWMTIuMzQ1MUg0OC40NDg4VjguMDI5MjFaIiBmaWxsPSIjMUIxRjU1Ii8+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNODQuMzExNyAxMy4xOTk5QzgzLjQyNTcgMTIuNzE0NSA4Mi40MzM1IDEyLjQ2MjEgODEuNDI2MyAxMi40NjU1QzgwLjM4NjcgMTIuNDIzOCA3OS4zNTcxIDEyLjY4NTggNzguNDU5OSAxMy4yMjAzQzc3LjgyMjYgMTMuNjMxOSA3Ny4yNTA4IDE0LjEzOSA3Ni43NjM0IDE0LjcyNDhWMTIuMzQ1NEg3NC4zMTg3VjI3LjYzMzJINzYuNzYzNFYxOS4wNTMzQzc2Ljc0ODcgMTguMjYxNyA3Ni45NDY4IDE3LjQ4MTEgNzcuMzM3MiAxNi43OTVDNzcuNzAyOCAxNi4xNjA1IDc4LjIyOTggMTUuNjM2NyA3OC44NjI0IDE1LjI3OEM3OS41MTUgMTQuOTE1IDgwLjI0OSAxNC43Mjk0IDgwLjk5MzUgMTQuNzM4OEM4Mi4wNTU3IDE0LjcwMjQgODMuMDgyNSAxNS4xMjkyIDgzLjgxMzcgMTUuOTExMkM4NC41NjM3IDE2Ljc2NTIgODQuOTU0NiAxNy44ODI1IDg0LjkwMzIgMTkuMDI0N1YyNy42MzM3SDg3LjM0NzlWMTguOTY2Qzg3LjM4NjkgMTcuNzIwMSA4Ny4wOTU3IDE2LjQ4NjEgODYuNTA1IDE1LjM5M0M4NS45ODgxIDE0LjQ3MDMgODUuMjI4OCAxMy43MTEyIDg0LjMxMTcgMTMuMTk5OVoiIGZpbGw9IiMxQjFGNTUiLz4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMDEuMjAzIDIyLjg3NjlDMTAwLjg0NiAyMy42NzgyIDEwMC4yNzcgMjQuMzYzMyA5OS41NTkgMjQuODU1OEM5OC43NjcxIDI1LjM2NzQgOTcuODQxNSAyNS42MjQ4IDk2LjkwMjYgMjUuNTkzOEM5NS45NjAxIDI1LjYxODEgOTUuMDMxIDI1LjM2MDkgOTQuMjMxMSAyNC44NTQzQzkzLjQ4OSAyNC4zNjc5IDkyLjg5NDkgMjMuNjgyNCA5Mi41MTU0IDIyLjg3MzlDOTIuMTE4MSAyMi4wMjg1IDkxLjkxNSAyMS4xMDIgOTEuOTIyMSAyMC4xNjUyQzkxLjkxMTQgMTkuMjIzNyA5Mi4xMTQ1IDE4LjI5MjIgOTIuNTE1NCAxNy40NDI4QzkyLjg5ODQgMTYuNjQwMiA5My40OTE3IDE1Ljk2MDEgOTQuMjMxMSAxNS40NzY2Qzk1LjAzMSAxNC45NzA1IDk1Ljk2MDEgMTQuNzEzMyA5Ni45MDI2IDE0LjczNzNDOTcuODQxNSAxNC43MDY3IDk4Ljc2NzEgMTQuOTY0IDk5LjU1OSAxNS40NzU1QzEwMC4yNzQgMTUuOTY1IDEwMC44NDQgMTYuNjQ1MSAxMDEuMjAzIDE3LjQ0MDlDMTAxLjU4NiAxOC4yOTYyIDEwMS43NzkgMTkuMjI2NSAxMDEuNzY4IDIwLjE2NkMxMDEuNzc2IDIxLjEwMDYgMTAxLjU4MyAyMi4wMjU3IDEwMS4yMDMgMjIuODc3MkwxMDEuMjAzIDIyLjg3NjlaTTEwMS42NTMgMTQuNzg3M0MxMDEuMTM3IDE0LjEyNzUgMTAwLjQ5MyAxMy41ODIyIDk5Ljc1OTQgMTMuMTg1NEM5OC43ODY3IDEyLjY4NDcgOTcuNzA2MSAxMi40MzcyIDk2LjYxNTggMTIuNDY1M0M5NS4yOTAzIDEyLjQzNyA5My45ODQzIDEyLjc5NTUgOTIuODU0OCAxMy40OTgyQzkxLjc5MDMgMTQuMTc4NiA5MC45Mjg5IDE1LjEzOTQgOTAuMzYxNCAxNi4yNzc5Qzg5Ljc2NDYgMTcuNDgzNSA4OS40NjE3IDE4LjgxNyA4OS40Nzg2IDIwLjE2NjJDODkuNDY1MyAyMS41MSA4OS43NjczIDIyLjgzNzkgOTAuMzYxNCAyNC4wMzk0QzkwLjkyNTMgMjUuMTg0IDkxLjc4NzYgMjYuMTUwNiA5Mi44NTM5IDI2LjgzNDFDOTMuOTg0MyAyNy41MzY4IDk1LjI4OTQgMjcuODk1NiA5Ni42MTU4IDI3Ljg2NzNDOTcuNzA2MSAyNy44OTU1IDk4Ljc4NjcgMjcuNjQ3OSA5OS43NTk0IDI3LjE0NzJDMTAwLjQ4OCAyNi43NTM2IDEwMS4xMzEgMjYuMjE2MSAxMDEuNjUyIDI1LjU2NjZWMjcuNjMyOEgxMDQuMDk4VjEyLjM0NTRIMTAxLjY1MkwxMDEuNjUzIDE0Ljc4NzNaIiBmaWxsPSIjMUIxRjU1Ii8+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTI2LjA3NyAxMy4yMTgyQzEyNS4yNzEgMTIuNzI1MSAxMjQuMzQ3IDEyLjQ2NDcgMTIzLjQwNCAxMi40NjU3QzEyMi41NDMgMTIuNDQzIDEyMS42ODggMTIuNjI5MiAxMjAuOTEyIDEzLjAwODZDMTIwLjI4MyAxMy4zMjI2IDExOS43MTYgMTMuNzUwMiAxMTkuMjM5IDE0LjI3MDhDMTE4Ljk1IDE0LjU4OTggMTE4LjY4MyAxNC45Mjg5IDExOC40NCAxNS4yODU3QzExOC4wMDQgMTQuNDU5NiAxMTcuMzYzIDEzLjc2MjkgMTE2LjU4IDEzLjI2MzdDMTE1Ljc1NiAxMi43Mzg5IDExNC44MDQgMTIuNDYyMSAxMTMuODMxIDEyLjQ2NkMxMTIuNzk4IDEyLjQxNyAxMTEuNzc3IDEyLjcwMzUgMTEwLjkxNiAxMy4yODQzQzExMC40MDUgMTMuNjQ5NCAxMDkuOTUzIDE0LjA5MiAxMDkuNTczIDE0LjU5NTlWMTIuMzQ1NEgxMDcuMTI5VjI3LjYzMzVIMTA5LjU3M1YxOC43MzExQzEwOS41NzMgMTcuNDY4OSAxMDkuOTQ4IDE2LjQ3NzggMTEwLjY4NyAxNS43ODYzQzExMS40MDMgMTUuMTAxMSAxMTIuMzU1IDE0LjcyNTYgMTEzLjM0MSAxNC43MzkyQzExNC4yNzYgMTQuNzIwNyAxMTUuMTc0IDE1LjExNjIgMTE1Ljc5OSAxNS44MjI1QzExNi40ODMgMTYuNjE3MyAxMTYuODM3IDE3LjY0ODkgMTE2Ljc5IDE4LjcwMjFWMjcuNjMzN0gxMTkuMjM0VjE4LjczMTRDMTE5LjIzNCAxNy40NjkyIDExOS42MDggMTYuNDc4NCAxMjAuMzQ3IDE1Ljc4NjRDMTIxLjA2NCAxNS4xMDEzIDEyMi4wMTUgMTQuNzI2IDEyMy4wMDEgMTQuNzM5NkMxMjMuOTM3IDE0LjcyMTEgMTI0LjgzNSAxNS4xMTY0IDEyNS40NiAxNS44MjI3QzEyNi4xNDMgMTYuNjE3NyAxMjYuNDk4IDE3LjY0OTEgMTI2LjQ1IDE4LjcwMjVWMjcuNjM0MUgxMjguODk1VjE4LjY0MzdDMTI4LjkyMSAxNy41MDAzIDEyOC42NTEgMTYuMzY5OCAxMjguMTExIDE1LjM2NTRDMTI3LjYzIDE0LjQ4MiAxMjYuOTI5IDEzLjc0MTYgMTI2LjA3NyAxMy4yMTgyWiIgZmlsbD0iIzExNThCRiIvPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTE0Mi4xNzkgMjEuMjc5N0MxNDIuMTk1IDIyLjA2NjUgMTQxLjk5NyAyMi44NDI2IDE0MS42MDYgMjMuNTIyNEMxNDEuMjM0IDI0LjE1MzUgMTQwLjcwOSAyNC42NzY0IDE0MC4wOCAyNS4wNDEzQzEzOS40MzEgMjUuNDEyOSAxMzguNjk2IDI1LjYwMzUgMTM3Ljk1MSAyNS41OTQxQzEzNi44OTQgMjUuNjI1MSAxMzUuODc0IDI1LjE5ODYgMTM1LjE0NSAyNC40MjEyQzEzNC4zODYgMjMuNTcxNyAxMzMuOTg5IDIyLjQ1MzEgMTM0LjA0IDIxLjMwODJWMTIuMzQ1NEgxMzEuNTk2VjIxLjM2NjlDMTMxLjU1NyAyMi42MTMgMTMxLjg0OCAyMy44NDY4IDEzMi40MzkgMjQuOTRDMTMyLjk1OSAyNS44NjYgMTMzLjcyNCAyNi42MjUyIDEzNC42NDkgMjcuMTMxOEMxMzUuNTMxIDI3LjYxMzkgMTM2LjUxNyAyNy44NjY0IDEzNy41MTkgMjcuODY2NEMxMzguNTU5IDI3LjkwOCAxMzkuNTg4IDI3LjY0NjEgMTQwLjQ4NiAyNy4xMTE1QzE0MS4xMjMgMjYuNjk5OSAxNDEuNjk1IDI2LjE5MjYgMTQyLjE4MiAyNS42MDdWMjcuNjMxNkgxNDQuNjI3VjEyLjM0NTRIMTQyLjE4MkwxNDIuMTc5IDIxLjI3OTdaIiBmaWxsPSIjMTE1OEJGIi8+CjxtYXNrIGlkPSJtYXNrMF8xXzcwIiBzdHlsZT0ibWFzay10eXBlOmx1bWluYW5jZSIgbWFza1VuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeD0iMTQ3IiB5PSI4IiB3aWR0aD0iOCIgaGVpZ2h0PSIyMCI+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTQ3LjE0NiA4LjA3NTIzSDE1NC44ODJWMjcuNjMxOUgxNDcuMTQ2VjguMDc1MjNaIiBmaWxsPSJ3aGl0ZSIvPgo8L21hc2s+CjxnIG1hc2s9InVybCgjbWFzazBfMV83MCkiPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTE1MS41NTUgMTIuMzQ1M1Y4LjA3NTIzSDE0OS4xMTFWMTIuMzQ1M0gxNDcuMTQ2VjE0LjU1OTFIMTQ5LjExMVYyNy42MzE5SDE1MS41NTVWMTQuNTU5MUgxNTQuODgyVjEyLjM0NTNIMTUxLjU1NVoiIGZpbGw9IiMxMTU4QkYiLz4KPC9nPgo8bWFzayBpZD0ibWFzazFfMV83MCIgc3R5bGU9Im1hc2stdHlwZTpsdW1pbmFuY2UiIG1hc2tVbml0cz0idXNlclNwYWNlT25Vc2UiIHg9IjAiIHk9IjEyIiB3aWR0aD0iMTUiIGhlaWdodD0iMjIiPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTAgMTIuMzQ1OEgxNC42MjA5VjMzLjM5OTFIMFYxMi4zNDU4WiIgZmlsbD0id2hpdGUiLz4KPC9tYXNrPgo8ZyBtYXNrPSJ1cmwoI21hc2sxXzFfNzApIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMS41ODE2IDIyLjgzNTFDMTEuMjA0NSAyMy42NDExIDEwLjYxNTkgMjQuMzI2NSA5Ljg4MDA5IDI0LjgxNjZDOS4wNzY3NiAyNS4zMjY1IDguMTQxOCAyNS41ODM4IDcuMTk0MTYgMjUuNTU1N0M2LjI2MDQ5IDI1LjU4MjcgNS4zMzk4NyAyNS4zMjUxIDQuNTUyMDMgMjQuODE2NkMzLjgyNjk3IDI0LjMyNzkgMy4yNTIzOCAyMy42NDIxIDIuODk0NDEgMjIuODM3NEMyLjUxMzcyIDIxLjk4NTIgMi4zMjA3NyAyMS4wNTkxIDIuMzI4NzggMjAuMTIzNUMyLjMxNzc4IDE5LjE4MzkgMi41MTA5MyAxOC4yNTMzIDIuODk0MDQgMTcuMzk3N0MzLjI1NTM3IDE2LjU5ODkgMy44Mjk1NyAxNS45MTgzIDQuNTUxNjYgMTUuNDMyMUM1LjMzOTg3IDE0LjkyNDEgNi4yNTk5NCAxNC42NjY3IDcuMTkzOTggMTQuNjkzNEM4LjE0MTQzIDE0LjY2NTggOS4wNzYyMyAxNC45MjMxIDkuODc5OTEgMTUuNDMyN0MxMC42MTI4IDE1LjkyIDExLjIwMSAxNi42IDExLjU4MTYgMTcuNDAwMkMxMS45ODIzIDE4LjI1MDEgMTIuMTg1MyAxOS4xODE5IDEyLjE3NTEgMjAuMTIzOEMxMi4xODI1IDIxLjA2MTMgMTEuOTc5NiAyMS45ODg3IDExLjU4MTYgMjIuODM1MVpNMTEuMjQ0NCAxMy40NTVDMTAuMTE0NSAxMi43NTIxIDguODA4NjYgMTIuMzkzNiA3LjQ4MzMxIDEyLjQyMTdDNi4zOTQxMiAxMi4zOTM4IDUuMzE0OTkgMTIuNjM1OCA0LjMzOTIzIDEzLjEyNzFDMy42MDUwNCAxMy41MTY2IDIuOTU5ODggMTQuMDU3OSAyLjQ0NTI3IDE0LjcxNlYxMi4zNDU4SDBWMzMuMzk5MUgyLjQ0NTI3VjI1LjQ5ODdDMi45NjY1OCAyNi4xNTA4IDMuNjA5MzMgMjYuNjkyNSA0LjMzNjgyIDI3LjA5MzJDNS4zMDczNiAyNy42MDQ3IDYuMzkwMjEgMjcuODU3OSA3LjQ4MzUgMjcuODI5QzguODA5MDMgMjcuODU3NiAxMC4xMTQ4IDI3LjQ5ODggMTEuMjQ0OCAyNi43OTU3QzEyLjMxMTYgMjYuMTExOSAxMy4xNzM4IDI1LjE0NTEgMTMuNzM3NyAyNC4wMDAyQzE0LjMzMTQgMjIuNzk3OSAxNC42MzQgMjEuNDY5NSAxNC42MjA0IDIwLjEyNTNDMTQuNjM3MiAxOC43NzU4IDE0LjMzNDUgMTcuNDQxOSAxMy43Mzc0IDE2LjIzNTdDMTMuMTcwMSAxNS4wOTcyIDEyLjMwODUgMTQuMTM2IDExLjI0NDQgMTMuNDU1WiIgZmlsbD0iIzFCMUY1NSIvPgo8L2c+CjwvZz4KPGRlZnM+CjxjbGlwUGF0aCBpZD0iY2xpcDBfMV83MCI+CjxyZWN0IHdpZHRoPSIxNTUiIGhlaWdodD0iMjkiIGZpbGw9IndoaXRlIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDgpIi8+CjwvY2xpcFBhdGg+CjwvZGVmcz4KPC9zdmc+Cg==">
+      <img class="logo inv" alt="" aria-hidden="true" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTU1IiBoZWlnaHQ9IjQ0IiB2aWV3Qm94PSIwIDAgMTU1IDQ0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcDBfMV8yOSkiPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTYyLjEzOCAyNy41NzhWMjUuMDc2MkM2Ni4xODQ2IDI1LjA3NjIgNjkuNDc2NyAyMS43NCA2OS40NzY3IDE3LjYzOTFINzEuOTQ1M0M3MS45NDUzIDIzLjExOTUgNjcuNTQ1OSAyNy41NzggNjIuMTM4IDI3LjU3OFoiIGZpbGw9IiNFRkE3MEYiLz4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik02OS4zMjQ2IDI3LjYyNzFDNjguNzkwMiAzMC4xMzE3IDY2Ljc5NzkgMzIuNTExNSA2My44OTk2IDMzLjcyNjNDNTkuNjI1NyAzNS41MTc2IDU0Ljk3OTIgMzQuMTA5MyA1My41NDE0IDMwLjU4NjNDNTIuMTAzNyAyNy4wNjM1IDU0LjQxMTIgMjIuNzQwNCA1OC42ODQ3IDIwLjk0OTNDNTkuODM3OSAyMC40NjU5IDYxLjAxNzcgMjAuMjE3NyA2Mi4xNTQ5IDIwLjE3ODhWMjAuMTU0NlYxNy42ODE5VjE3LjYzOTdDNjEuOTAwNCAxNy42MDU0IDYxLjY1MDYgMTcuNTUgNjEuNDA4OSAxNy40NzAxQzYwLjQ3MTkgMTcuMTYwOCA1OS43NzE0IDE2LjUzOSA1OS40MzY4IDE1LjcxODhDNTguNzE2NCAxMy45NTQzIDU5Ljg3NiAxMS43ODczIDYyLjAyMDkgMTAuODg4MkM2Mi42NTQ0IDEwLjYyMjggNjMuMzAzNiAxMC40OTcgNjMuOTIyOSAxMC40OTdDNjUuNDAxOSAxMC40OTcgNjYuNzEwMSAxMS4yMTM5IDY3LjIxNzQgMTIuNDU3N0M2Ny40ODQgMTMuMTEwNCA2Ny40OTQ3IDEzLjgzOTkgNjcuMjYzNiAxNC41NTlINjkuODA5MkM2OS45OTY2IDEzLjUyMTYgNjkuODk1NiAxMi40NzQ3IDY5LjQ5ODYgMTEuNTAxNkM2OC4yNTgzIDguNDYyMzQgNjQuNDgwOSA3LjE1MDE5IDYxLjA3NzYgOC41NzYzOEM1Ny42NzQ2IDEwLjAwMjcgNTUuOTE1MiAxMy42MzU4IDU3LjE1NTYgMTYuNjc0OUM1Ny40MjQ4IDE3LjMzNDYgNTcuODEzNCAxNy45MjE0IDU4LjMwMjggMTguNDE3OUM1OC4xMTUgMTguNDg2NCA1Ny45Mjc4IDE4LjU1OTMgNTcuNzQxMyAxOC42Mzc1QzUyLjIxMDEgMjAuOTU1OSA0OS4zMDI2IDI2Ljc0NTIgNTEuMjYwMiAzMS41NDI0QzUyLjY2NjcgMzQuOTg4NiA1Ni4yMDc0IDM3IDYwLjE0MDQgMzdDNjEuNjgyNiAzNyA2My4yODUgMzYuNjkwOCA2NC44NDI4IDM2LjAzODFDNjguNzA0MSAzNC40MTk3IDcxLjI4NCAzMS4xMSA3MS44MjU3IDI3LjYyNzFINjkuMzI0NloiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMjcuNjc5MiAyMi44MzYyQzI3LjMyMjYgMjMuNjM3OCAyNi43NTMzIDI0LjMyMzQgMjYuMDM0NiAyNC44MTYzQzI1LjI0MjcgMjUuMzI4IDI0LjMxNjcgMjUuNTg1NSAyMy4zNzgxIDI1LjU1NDdDMjIuNDM0NyAyNS41Nzg5IDIxLjUwNTIgMjUuMzIxNSAyMC43MDQ5IDI0LjgxNDhDMTkuOTYyNyAyNC4zMjg1IDE5LjM2ODggMjMuNjQyNSAxOC45ODk1IDIyLjgzMzVDMTguNTkxMSAyMS45ODc3IDE4LjM4ODEgMjEuMDYwOSAxOC4zOTU3IDIwLjEyMzdDMTguMzg1MSAxOS4xODE5IDE4LjU4ODIgMTguMjUwMSAxOC45ODkxIDE3LjQwMDNDMTkuMzcxOSAxNi41OTczIDE5Ljk2NTcgMTUuOTE2OSAyMC43MDQ5IDE1LjQzMzJDMjEuNTA1MiAxNC45MjY5IDIyLjQzNDcgMTQuNjY5NyAyMy4zNzgxIDE0LjY5MzdDMjQuMzE2NyAxNC42NjI5IDI1LjI0MjYgMTQuOTIwNCAyNi4wMzQ2IDE1LjQzMjFDMjYuNzUwNSAxNS45MjE4IDI3LjMxOTUgMTYuNjAxOSAyNy42NzkyIDE3LjM5NzhDMjguMDYyMiAxOC4yNTM1IDI4LjI1NSAxOS4xODQyIDI4LjI0NDQgMjAuMTIzN0MyOC4yNTIyIDIxLjA1OTEgMjguMDU5NSAyMS45ODUxIDI3LjY3OTIgMjIuODM3NVYyMi44MzYyWk0yOC4xMjkxIDE0Ljc0MzVDMjcuNjEyNyAxNC4wODM1IDI2Ljk2NzkgMTMuNTM4IDI2LjIzNSAxMy4xNDEyQzI1LjI2MjIgMTIuNjQwMSAyNC4xODE0IDEyLjM5MjQgMjMuMDkwMyAxMi40MjA1QzIxLjc2NDQgMTIuMzkyIDIwLjQ1ODQgMTIuNzUwNiAxOS4zMjgxIDEzLjQ1MzdDMTguMjYzNiAxNC4xMzQ1IDE3LjQwMiAxNS4wOTU2IDE2LjgzNDcgMTYuMjM0NUMxNi4yMzcyIDE3LjQ0MDcgMTUuOTM0NSAxOC43NzQ0IDE1Ljk1MTYgMjAuMTIzN0MxNS45Mzc4IDIxLjQ2ODEgMTYuMjQwNCAyMi43OTY1IDE2LjgzNDMgMjMuOTk4NkMxNy4zOTg3IDI1LjE0MzUgMTguMjYwOSAyNi4xMTAzIDE5LjMyODEgMjYuNzk0NEMyMC40NTg0IDI3LjQ5NzQgMjEuNzY0MiAyNy44NTYxIDIzLjA5MDMgMjcuODI3N0MyNC4xODE0IDI3Ljg1NjEgMjUuMjYyMiAyNy42MDg2IDI2LjIzNSAyNy4xMDc0QzI2Ljk2MzggMjYuNzEzNSAyNy42MDc2IDI2LjE3NTggMjguMTI4OCAyNS41MjYyVjI3LjYzMzlIMzAuNTc0M1YxMi4zNDU0SDI4LjEyODhMMjguMTI5MSAxNC43NDM1WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0zOC45NTY0IDEyLjg4ODhDMzguMzQ3IDEzLjE2MzggMzcuNzkwMSAxMy41NDU0IDM3LjMxMTMgMTQuMDE2M0MzNi45MTkyIDE0LjQwMDggMzYuNTg0NCAxNC44NDE3IDM2LjMxNzggMTUuMzI0NUMzNi4yNDggMTUuNDU3IDM2LjE4NSAxNS41ODE2IDM2LjEyOTEgMTUuNjk4M1YxMi4zNDU0SDMzLjY4MzVWMjcuNjMzOUgzNi4xMjkxVjIxLjAwNDlDMzYuMTIzOSAxOS45Nzk4IDM2LjMzMTYgMTguOTY1MyAzNi43MzkyIDE4LjAyNzFDMzcuMTIxMSAxNy4xMzM0IDM3LjcyNCAxNi4zNTQ3IDM4LjQ4OTUgMTUuNzY2MkMzOS4yNzMxIDE1LjE4MTMgNDAuMjI1NiAxNC44NzY2IDQxLjE5ODQgMTQuOUg0MS41OTY3VjEyLjQyMTdINDEuMzEzNkM0MC41MDM3IDEyLjQwMjYgMzkuNjk5NSAxMi41NjIgMzguOTU2NCAxMi44ODg4WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik00OC40NjIyIDguMDI5MjFINDYuMDE2M1YxMi4zNDUxSDQ0LjA1MDVWMTQuNTU5N0g0Ni4wMTYzVjI3LjYzMzZINDguNDYyMlYxNC41NTk3SDUxLjc4ODhWMTIuMzQ1MUg0OC40NjIyVjguMDI5MjFaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTg0LjMzNDMgMTMuMTk5OUM4My40NDgyIDEyLjcxNDUgODIuNDU1NyAxMi40NjIxIDgxLjQ0ODIgMTIuNDY1NUM4MC40MDgzIDEyLjQyMzggNzkuMzc4NCAxMi42ODU4IDc4LjQ4MSAxMy4yMjAzQzc3Ljg0MzUgMTMuNjMxOSA3Ny4yNzE2IDE0LjEzOSA3Ni43ODQxIDE0LjcyNDhWMTIuMzQ1NEg3NC4zMzg3VjI3LjYzMzJINzYuNzg0MVYxOS4wNTMzQzc2Ljc2OTQgMTguMjYxNyA3Ni45Njc2IDE3LjQ4MTEgNzcuMzU4IDE2Ljc5NUM3Ny43MjM4IDE2LjE2MDUgNzguMjUwOCAxNS42MzY3IDc4Ljg4MzYgMTUuMjc4Qzc5LjUzNjUgMTQuOTE1IDgwLjI3MDcgMTQuNzI5NCA4MS4wMTUzIDE0LjczODhDODIuMDc3OCAxNC43MDI0IDgzLjEwNDggMTUuMTI5MiA4My44MzYyIDE1LjkxMTJDODQuNTg2NCAxNi43NjUyIDg0Ljk3NzUgMTcuODgyNSA4NC45MjYxIDE5LjAyNDdWMjcuNjMzN0g4Ny4zNzE0VjE4Ljk2NkM4Ny40MTA0IDE3LjcyMDEgODcuMTE5MiAxNi40ODYxIDg2LjUyODIgMTUuMzkzQzg2LjAxMTMgMTQuNDcwMyA4NS4yNTE3IDEzLjcxMTIgODQuMzM0MyAxMy4xOTk5WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMDEuMjI5IDIyLjg3N0MxMDAuODczIDIzLjY3ODIgMTAwLjMwNCAyNC4zNjMzIDk5LjU4NDggMjQuODU1OEM5OC43OTI5IDI1LjM2NzQgOTcuODY3MyAyNS42MjQ4IDk2LjkyODQgMjUuNTkzOEM5NS45ODUxIDI1LjYxODEgOTUuMDU2IDI1LjM2MDkgOTQuMjU1MSAyNC44NTQzQzkzLjUxNCAyNC4zNjc5IDkyLjkxOTggMjMuNjgyNCA5Mi41NDAzIDIyLjg3MzlDOTIuMTQyMSAyMi4wMjg1IDkxLjkzOSAyMS4xMDIgOTEuOTQ2MiAyMC4xNjUyQzkxLjkzNTUgMTkuMjIzNyA5Mi4xMzg2IDE4LjI5MjIgOTIuNTM5NCAxNy40NDI4QzkyLjkyMjUgMTYuNjQwMiA5My41MTY3IDE1Ljk2MDEgOTQuMjU1MSAxNS40NzY2Qzk1LjA1NiAxNC45NzA1IDk1Ljk4NTEgMTQuNzEzMyA5Ni45Mjg0IDE0LjczNzNDOTcuODY3MyAxNC43MDY3IDk4Ljc5MjkgMTQuOTY0IDk5LjU4NDggMTUuNDc1NUMxMDAuMzAxIDE1Ljk2NSAxMDAuODcgMTYuNjQ1MSAxMDEuMjMgMTcuNDQwOUMxMDEuNjEzIDE4LjI5NjIgMTAxLjgwNiAxOS4yMjY1IDEwMS43OTUgMjAuMTY2QzEwMS44MDMgMjEuMTAwNiAxMDEuNjEgMjIuMDI1NyAxMDEuMjMgMjIuODc3MkwxMDEuMjI5IDIyLjg3N1pNMTAxLjY4IDE0Ljc4NzNDMTAxLjE2MyAxNC4xMjc1IDEwMC41MTggMTMuNTgyMiA5OS43ODYxIDEzLjE4NTRDOTguODEyNSAxMi42ODQ3IDk3LjczMTkgMTIuNDM3MiA5Ni42NDE2IDEyLjQ2NTNDOTUuMzE1MiAxMi40MzcgOTQuMDA5MyAxMi43OTU1IDkyLjg3ODggMTMuNDk4MkM5MS44MTQzIDE0LjE3ODYgOTAuOTUyOSAxNS4xMzk0IDkwLjM4NTUgMTYuMjc3OUM4OS43ODc3IDE3LjQ4MzUgODkuNDg0OSAxOC44MTcgODkuNTAxOCAyMC4xNjYyQzg5LjQ4ODQgMjEuNTEgODkuNzkxMyAyMi44Mzc5IDkwLjM4NDYgMjQuMDM5NEM5MC45NDk0IDI1LjE4NCA5MS44MTE3IDI2LjE1MDYgOTIuODc4OCAyNi44MzQxQzk0LjAwOTMgMjcuNTM2OCA5NS4zMTQzIDI3Ljg5NTYgOTYuNjQwNyAyNy44NjczQzk3LjczMTkgMjcuODk1NSA5OC44MTI1IDI3LjY0NzkgOTkuNzg1MiAyNy4xNDcyQzEwMC41MTQgMjYuNzUzNiAxMDEuMTU4IDI2LjIxNjEgMTAxLjY3OSAyNS41NjY2VjI3LjYzMjhIMTA0LjEyNVYxMi4zNDU0SDEwMS42NzlMMTAxLjY4IDE0Ljc4NzNaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTEyNi4xMTEgMTMuMjE4MkMxMjUuMzA0IDEyLjcyNTEgMTI0LjM3OSAxMi40NjQ3IDEyMy40MzcgMTIuNDY1N0MxMjIuNTc2IDEyLjQ0MyAxMjEuNzIxIDEyLjYyOTIgMTIwLjk0NSAxMy4wMDg2QzEyMC4zMTUgMTMuMzIyNiAxMTkuNzQ4IDEzLjc1MDIgMTE5LjI3MSAxNC4yNzA4QzExOC45ODEgMTQuNTg5OCAxMTguNzE1IDE0LjkyODkgMTE4LjQ3MyAxNS4yODU3QzExOC4wMzUgMTQuNDU5NiAxMTcuMzk0IDEzLjc2MjkgMTE2LjYxMSAxMy4yNjM3QzExNS43ODggMTIuNzM4OSAxMTQuODM1IDEyLjQ2MjEgMTEzLjg2MiAxMi40NjZDMTEyLjgyOCAxMi40MTcgMTExLjgwOCAxMi43MDM1IDExMC45NDYgMTMuMjg0M0MxMTAuNDM1IDEzLjY0OTQgMTA5Ljk4MiAxNC4wOTIgMTA5LjYwMyAxNC41OTU5VjEyLjM0NTRIMTA3LjE1OFYyNy42MzM1SDEwOS42MDNWMTguNzMxMUMxMDkuNjAzIDE3LjQ2ODkgMTA5Ljk3NyAxNi40Nzc4IDExMC43MTYgMTUuNzg2M0MxMTEuNDMzIDE1LjEwMTEgMTEyLjM4NiAxNC43MjU2IDExMy4zNzEgMTQuNzM5MkMxMTQuMzA3IDE0LjcyMDcgMTE1LjIwNSAxNS4xMTYyIDExNS44MyAxNS44MjI1QzExNi41MTQgMTYuNjE3MyAxMTYuODY5IDE3LjY0ODkgMTE2LjgyMSAxOC43MDIxVjI3LjYzMzdIMTE5LjI2NlYxOC43MzE0QzExOS4yNjYgMTcuNDY5MiAxMTkuNjQgMTYuNDc4NCAxMjAuMzc5IDE1Ljc4NjRDMTIxLjA5NiAxNS4xMDEzIDEyMi4wNDggMTQuNzI2IDEyMy4wMzQgMTQuNzM5NkMxMjMuOTcxIDE0LjcyMTEgMTI0Ljg2OCAxNS4xMTY0IDEyNS40OTQgMTUuODIyN0MxMjYuMTc3IDE2LjYxNzcgMTI2LjUzMiAxNy42NDkxIDEyNi40ODQgMTguNzAyNVYyNy42MzQxSDEyOC45M1YxOC42NDM3QzEyOC45NTYgMTcuNTAwMyAxMjguNjg1IDE2LjM2OTggMTI4LjE0NSAxNS4zNjU0QzEyNy42NjQgMTQuNDgyIDEyNi45NjMgMTMuNzQxNiAxMjYuMTExIDEzLjIxODJaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTE0Mi4yMTcgMjEuMjc5N0MxNDIuMjMzIDIyLjA2NjUgMTQyLjAzNSAyMi44NDI2IDE0MS42NDQgMjMuNTIyNEMxNDEuMjczIDI0LjE1MzUgMTQwLjc0NyAyNC42NzY0IDE0MC4xMTggMjUuMDQxM0MxMzkuNDY5IDI1LjQxMjkgMTM4LjczNCAyNS42MDM1IDEzNy45ODggMjUuNTk0MUMxMzYuOTMxIDI1LjYyNTEgMTM1LjkxIDI1LjE5ODYgMTM1LjE4MSAyNC40MjEyQzEzNC40MjIgMjMuNTcxNyAxMzQuMDI1IDIyLjQ1MzEgMTM0LjA3NyAyMS4zMDgyVjEyLjM0NTRIMTMxLjYzMlYyMS4zNjY5QzEzMS41OTIgMjIuNjEzIDEzMS44ODQgMjMuODQ2OCAxMzIuNDc1IDI0Ljk0QzEzMi45OTQgMjUuODY2IDEzMy43NjEgMjYuNjI1MiAxMzQuNjg1IDI3LjEzMThDMTM1LjU2NyAyNy42MTM5IDEzNi41NTQgMjcuODY2NCAxMzcuNTU2IDI3Ljg2NjRDMTM4LjU5NyAyNy45MDggMTM5LjYyNiAyNy42NDYxIDE0MC41MjQgMjcuMTExNUMxNDEuMTYxIDI2LjY5OTkgMTQxLjczMyAyNi4xOTI2IDE0Mi4yMjEgMjUuNjA3VjI3LjYzMTZIMTQ0LjY2N1YxMi4zNDU0SDE0Mi4yMjFMMTQyLjIxNyAyMS4yNzk3WiIgZmlsbD0id2hpdGUiLz4KPG1hc2sgaWQ9Im1hc2swXzFfMjkiIHN0eWxlPSJtYXNrLXR5cGU6bHVtaW5hbmNlIiBtYXNrVW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4PSIxNDciIHk9IjgiIHdpZHRoPSI4IiBoZWlnaHQ9IjIwIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNDcuMTg1IDguMDc1MjNIMTU0LjkyM1YyNy42MzE5SDE0Ny4xODVWOC4wNzUyM1oiIGZpbGw9IndoaXRlIi8+CjwvbWFzaz4KPGcgbWFzaz0idXJsKCNtYXNrMF8xXzI5KSI+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTUxLjU5NiAxMi4zNDUzVjguMDc1MjNIMTQ5LjE1VjEyLjM0NTNIMTQ3LjE4NVYxNC41NTkxSDE0OS4xNVYyNy42MzE5SDE1MS41OTZWMTQuNTU5MUgxNTQuOTIzVjEyLjM0NTNIMTUxLjU5NloiIGZpbGw9IndoaXRlIi8+CjwvZz4KPG1hc2sgaWQ9Im1hc2sxXzFfMjkiIHN0eWxlPSJtYXNrLXR5cGU6bHVtaW5hbmNlIiBtYXNrVW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4PSIwIiB5PSIxMiIgd2lkdGg9IjE1IiBoZWlnaHQ9IjIyIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0wIDEyLjM0NThIMTQuNjI0OFYzMy4zOTkxSDBWMTIuMzQ1OFoiIGZpbGw9IndoaXRlIi8+CjwvbWFzaz4KPGcgbWFzaz0idXJsKCNtYXNrMV8xXzI5KSI+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTEuNTg0NyAyMi44MzUxQzExLjIwNzUgMjMuNjQxMSAxMC42MTg3IDI0LjMyNjUgOS44ODI2OCAyNC44MTY2QzkuMDc5MTcgMjUuMzI2NSA4LjE0Mzk4IDI1LjU4MzggNy4xOTYwOSAyNS41NTU3QzYuMjYyMTcgMjUuNTgyNyA1LjM0MTI5IDI1LjMyNTEgNC41NTMyNSAyNC44MTY2QzMuODI3OTggMjQuMzI3OSAzLjI1MzI1IDIzLjY0MjEgMi44OTUxOSAyMi44Mzc0QzIuNTE0MzkgMjEuOTg1MiAyLjMyMTM4IDIxLjA1OTEgMi4zMjkzOSAyMC4xMjM1QzIuMzE4NDEgMTkuMTgzOSAyLjUxMTYgMTguMjUzMyAyLjg5NDgxIDE3LjM5NzdDMy4yNTYyMyAxNi41OTg5IDMuODMwNTkgMTUuOTE4MyA0LjU1Mjg4IDE1LjQzMjFDNS4zNDEyOSAxNC45MjQxIDYuMjYxNjEgMTQuNjY2NyA3LjE5NTkgMTQuNjkzNEM4LjE0MzYgMTQuNjY1OCA5LjA3ODY0IDE0LjkyMzEgOS44ODI1IDE1LjQzMjdDMTAuNjE1NiAxNS45MiAxMS4yMDM5IDE2LjYgMTEuNTg0NyAxNy40MDAyQzExLjk4NTQgMTguMjUwMSAxMi4xODg1IDE5LjE4MTkgMTIuMTc4MyAyMC4xMjM4QzEyLjE4NTggMjEuMDYxMyAxMS45ODI4IDIxLjk4ODcgMTEuNTg0NyAyMi44MzUxWk0xMS4yNDc0IDEzLjQ1NUMxMC4xMTcxIDEyLjc1MjEgOC44MTEwMSAxMi4zOTM2IDcuNDg1MzEgMTIuNDIxN0M2LjM5NTgzIDEyLjM5MzggNS4zMTY0MSAxMi42MzU4IDQuMzQwMzkgMTMuMTI3MUMzLjYwNiAxMy41MTY2IDIuOTYwNjYgMTQuMDU3OSAyLjQ0NTkyIDE0LjcxNlYxMi4zNDU4SDBWMzMuMzk5MUgyLjQ0NTkyVjI1LjQ5ODdDMi45NjczNyAyNi4xNTA4IDMuNjEwMjkgMjYuNjkyNSA0LjMzNzk3IDI3LjA5MzJDNS4zMDg3OCAyNy42MDQ3IDYuMzkxOTIgMjcuODU3OSA3LjQ4NTQ5IDI3LjgyOUM4LjgxMTM5IDI3Ljg1NzYgMTAuMTE3NSAyNy40OTg4IDExLjI0NzggMjYuNzk1N0MxMi4zMTQ5IDI2LjExMTkgMTMuMTc3MyAyNS4xNDUxIDEzLjc0MTQgMjQuMDAwMkMxNC4zMzUyIDIyLjc5NzkgMTQuNjM3OSAyMS40Njk1IDE0LjYyNDMgMjAuMTI1M0MxNC42NDExIDE4Ljc3NTggMTQuMzM4MyAxNy40NDE5IDEzLjc0MSAxNi4yMzU3QzEzLjE3MzYgMTUuMDk3MiAxMi4zMTE3IDE0LjEzNiAxMS4yNDc0IDEzLjQ1NVoiIGZpbGw9IndoaXRlIi8+CjwvZz4KPC9nPgo8ZGVmcz4KPGNsaXBQYXRoIGlkPSJjbGlwMF8xXzI5Ij4KPHJlY3Qgd2lkdGg9IjE1NSIgaGVpZ2h0PSIyOSIgZmlsbD0id2hpdGUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgOCkiLz4KPC9jbGlwUGF0aD4KPC9kZWZzPgo8L3N2Zz4K">
       <div class="t">Mon plan santé</div>
       <div class="who">
         <span class="cart num" id="cartTag">—</span>
         <button type="button" class="dossier" id="dossierTag">Type de dossier</button>
-        <div class="avatar cross" aria-hidden="true"></div>
-        <div><span class="lbl">Conseiller</span><br><span class="bar-txt" style="width:72px"></span></div>
+        <div class="avatar" id="advAvatar" aria-hidden="true">?</div>
+        <label class="advisor"><span class="lbl">Conseiller</span><input type="text" class="nm adv-in" id="advisorName" placeholder="Votre nom" maxlength="40" autocomplete="name" spellcheck="false" aria-label="Nom du conseiller"></label>
       </div>
     </div>
     <nav class="stepper" id="stepper" aria-label="Étapes de l'entretien"></nav>
@@ -450,6 +588,7 @@
   </div>
 
   <aside class="notes" id="notes"></aside>
+
 
   <div class="src">
     <strong>Données.</strong> Avantages et plafonds : <a href="https://www.partenamut.be/fr/dam/jcr:7a838c95-0b5c-4711-a9bc-b18d8125a6fb/BROCHURE%20AVANTAGES%20PARTENAMUT_2026_WEB.pdf">brochure Avantages 2026</a> ·
@@ -546,19 +685,45 @@
   var PER_YEAR = {an:1,"2ans":0.5,"3ans":1/3,"5ans":0.2,mois:12};
 
   var HOSPI = {
-    smart:{l:"Hospitalia Smart", d:"La formule d'entrée.", p:[4.11,5.38,11.41,14.10,30.93],
+    smart:{l:"Hospitalia Smart", d:"La formule d'entrée.",
       room:100, hon:100, cap:25000, pre:60, post:120, assist:false, age:"sans limite"},
-    care:{l:"Hospitalia Care", d:"Le bon compromis.", p:[6.94,8.72,22.12,27.15,48.93],
-      room:125, hon:200, cap:null, pre:60, post:180, assist:true, age:"jusqu'à 67 ans"},
-    plus:{l:"Hospitalia Plus", d:"La couverture maximale.", p:[8.46,10.59,26.90,33.04,59.57],
-      room:125, hon:300, cap:null, pre:60, post:180, assist:true, age:"jusqu'à 67 ans"}
+    care:{l:"Hospitalia Care", d:"Le bon compromis.",
+      room:125, hon:200, cap:null, pre:60, post:180, assist:true, age:"jusqu'à 67 ans inclus"},
+    plus:{l:"Hospitalia Plus", d:"La couverture maximale.",
+      room:125, hon:300, cap:null, pre:60, post:180, assist:true, age:"jusqu'à 67 ans inclus"}
   };
   var PLANS = ["smart","care","plus"];
   var CONT = [{m:17,p:3.31},{m:24,p:4.09},{m:29,p:5.22},{m:34,p:6.21},{m:39,p:7.14},{m:45,p:7.89},{m:49,p:8.87},{m:54,p:9.94},{m:59,p:18.88},{m:64,p:25.61}];
-  function bandH(a){ return a<18?0 : a<25?1 : a<50?2 : a<60?3 : 4; }
-  function pH(k,a){ return HOSPI[k].p[bandH(a)]; }
+  /* Primes mensuelles 2026 (brochure Hospitalia 2026, p. 16-17). Elles dépendent de l'âge À LA SOUSCRIPTION :
+     qui souscrit à 52 ans ne paie pas le tarif de l'assuré de 52 ans entré avant 46 ans (14,10 € en Smart),
+     mais celui de la tranche « souscription entre 50 et 54 ans » (15,51 €). Le conseiller souscrit aujourd'hui :
+     l'âge saisi est donc l'âge à la souscription. Simplification : le détail « âge au 1er janvier de l'année
+     d'affiliation » (lignes 49 ans et 59 ans du tableau) n'est pas modélisé.
+     mg = supplément de la Garantie Maladies graves (de 0,34 € à 2,60 € selon l'âge, p. 14) ; absent après 67 ans. */
+  var HOSPI_GRID = [
+    {max:17,  p:{smart:4.11,  care:6.94,  plus:8.46},   mg:0.34},
+    {max:24,  p:{smart:5.38,  care:8.72,  plus:10.59},  mg:0.43},
+    {max:45,  p:{smart:11.41, care:22.12, plus:26.90},  mg:1.16},
+    {max:49,  p:{smart:11.98, care:23.21, plus:28.25},  mg:1.16},
+    {max:54,  p:{smart:15.51, care:29.84, plus:36.32},  mg:1.43},
+    {max:59,  p:{smart:21.15, care:40.63, plus:49.43},  mg:1.43},
+    {max:67,  p:{smart:52.58, care:83.07, plus:101.07}, mg:2.60},
+    {max:70,  p:{smart:52.58}, mg:0},
+    {max:75,  p:{smart:55.67}, mg:0},
+    {max:200, p:{smart:58.77}, mg:0}
+  ];
+  function gridH(a){ for(var i=0;i<HOSPI_GRID.length;i++){ if(a<=HOSPI_GRID[i].max) return HOSPI_GRID[i]; } return HOSPI_GRID[HOSPI_GRID.length-1]; }
+  function pH(k,a){ var v = gridH(a).p[k]; return v != null ? v : 0; }
+  function pMG(a){ return mgOk(a) ? gridH(a).mg : 0; }
+  /* Garantie Maladies graves : souscription jusqu'à 67 ans inclus (brochure p. 20 et note p. 17). */
+  function mgOk(a){ return a <= 67; }
+  /* Franchise Hospitalia Plus : 150 €, une fois par an, séjour d'au moins 1 nuit en chambre particulière dans un
+     hôpital qui réclame plus de 200 % de suppléments d'honoraires (liste p. 10). Aucune en One Day ni en chambre commune. */
+  var FRANCHISE_PLUS = 150;
   function pC(a){ for(var i=0;i<CONT.length;i++){ if(a<=CONT[i].m) return CONT[i].p; } return null; }
-  var MG_PRIME = 0.34, MG_CAP = 10000, MG_COUNT = 33;
+  /* Hospitalia Continuité : souscription jusqu'à 64 ans inclus (brochure p. 20) */
+  function contOk(a){ return pC(a) != null; }
+  var MG_PRIME = 0.34 /* « à partir de » */, MG_CAP = 10000, MG_COUNT = 33;
   /* Matériel médical ET médicaments SANS intervention de l'assurance obligatoire : Hospitalia
      n'en rembourse que 50 %, sous plafond. Confirmé par le métier le 30/09/2026 :
        Smart — 1 250 € en chambre particulière, 2 500 € en chambre commune
@@ -608,7 +773,7 @@
     {id:"appendicite", l:"Appendicite", short:"Urgence, 1 nuit", src:"reel", srcTxt:SRC_REEL,
      story:"Votre fils se plaint du ventre un dimanche soir. Aux urgences, le diagnostic tombe : appendicite. Il est opéré par cœlioscopie dans la nuit et sort le lendemain.",
      days:1, roomDay:155, honBase:605, honPct:300, tm:325, oneDay:false, mat:200, med:35,
-     teach:"Dès qu'il y a une nuit, le supplément de chambre passe à 155 € — au-dessus du plafond le plus élevé, qui est de 125 €. Il reste donc toujours quelque chose à payer sur la chambre : 30 € avec Care ou Plus, 55 € avec Smart. Ce sont les honoraires qui font le gros de la facture."},
+     teach:"Dès qu'il y a une nuit, le supplément de chambre passe à 155 € — au-dessus du plafond le plus élevé, qui est de 125 €. Il reste donc toujours quelque chose à payer sur la chambre : 30 € avec Care ou Plus, 55 € avec Smart. À 300 %, Plus ajoute sa franchise de 150 € (hôpitaux qui facturent plus de 200 %) : 180 € au total. Ce sont les honoraires qui font le gros de la facture."},
     {id:"amygdales", l:"Amygdales de l'enfant", short:"Hospitalisation de jour", src:"reel", srcTxt:SRC_REEL,
      story:"Votre fille enchaîne les angines depuis deux hivers. L'ORL propose de retirer les amygdales : elle entre le matin, ressort l'après-midi.",
      days:1, roomDay:95, honBase:382.5, honPct:300, tm:35, oneDay:true, mat:10, med:25,
@@ -620,11 +785,11 @@
     {id:"dos", l:"Arthrodèse lombaire", short:"Un niveau, 3 nuits", src:"reel", srcTxt:SRC_REEL,
      story:"Un mal de dos qui ne passe plus. Le chirurgien propose une arthrodèse lombaire sur un niveau. Trois nuits d'hospitalisation.",
      days:3, roomDay:155, honBase:1645, honPct:300, tm:495, oneDay:false, mat:110, med:260,
-     teach:"4 935 € de suppléments d'honoraires à 300 %, le maximum légal (3 290 € à 200 %) : Care laisse 1 735 € à charge, Plus seulement 90 €. À 200 %, Care et Plus donnent le même résultat. C'est le scénario qui justifie l'écart entre les deux formules — repassez le sélecteur à 200 % pour le montrer. À surveiller aussi : 260 € de médicaments, le montant le plus élevé des cinq scénarios."},
+     teach:"4 935 € de suppléments d'honoraires à 300 %, le maximum légal (3 290 € à 200 %) : Care laisse 1 735 € à charge, Plus seulement 240 € — dont 150 € de franchise, due dans les hôpitaux qui facturent plus de 200 %. À 200 %, Care et Plus donnent le même résultat et il ne reste rien. C'est le scénario qui justifie l'écart entre les deux formules — repassez le sélecteur à 200 % pour le montrer. À surveiller aussi : 260 € de médicaments, le montant le plus élevé des cinq scénarios."},
     {id:"genou", l:"Prothèse de genou", short:"Orthopédie, 5 nuits", src:"reel", srcTxt:SRC_REEL,
      story:"Un genou qui bloque depuis deux ans. L'orthopédiste propose une prothèse totale. Cinq nuits d'hospitalisation, puis de la kiné pendant des mois.",
      days:5, roomDay:155, honBase:1605, honPct:300, tm:1195, oneDay:false, mat:880, med:85,
-     teach:"1 195 € restent dus même en chambre commune, dont 880 € de matériel et 85 € de médicaments. Si rien de tout cela n'a d'intervention de l'assurance obligatoire, Hospitalia n'en rembourse que 50 % : le reste à charge passe de 150 € à 633 € avec Plus (de 1 755 € à 2 238 € avec Care), et 483 € restent dus même en chambre commune. Renseignez les deux champs pour le vérifier — c'est le scénario où l'écart est le plus large."}
+     teach:"1 195 € restent dus même en chambre commune, dont 880 € de matériel et 85 € de médicaments. Si rien de tout cela n'a d'intervention de l'assurance obligatoire, Hospitalia n'en rembourse que 50 % : le reste à charge passe de 300 € à 783 € avec Plus, franchise de 150 € comprise (de 1 755 € à 2 238 € avec Care), et 483 € restent dus même en chambre commune. Renseignez les deux champs pour le vérifier — c'est le scénario où l'écart est le plus large."}
     /* Le scénario « cancer », qui démontrait la Garantie Maladies graves, demande une autre
        source : le simulateur hospitalier ne chiffre pas les soins ambulatoires. */
   ];
@@ -657,9 +822,17 @@
      story:"Chute à vélo. Deux incisives cassées, à reconstruire par des couronnes.",
      billed:1800, ao:0, kind:"acc", rate:1.00, cap:5000, wait:0,
      teach:"100 % jusqu'à 5 000 € par accident, sans stage d'attente, pour tout accident survenu après la souscription — exclusivement les accidents de la vie privée, scolaire ou lors d'une pratique encadrée, hors accidents de circulation. Le plafond ne dépend pas de l'ancienneté — c'est la seule garantie qui protège dès le premier jour."},
+    /* Cancer : le contenu (taux, plafond, stage, conditions) vient de la brochure Dentalia Up 2026
+       (p. 3 et p. 6) et des conditions générales (art. 12.1.5). Aucun barème public ne chiffre un
+       cas oncologique : le montant par défaut est CONSTRUIT en additionnant deux postes déjà sourcés
+       (curatif 440 € dont 330 € d'AO, implant 2 000 €). D'où src:"hyp" — affiché comme hypothèse. */
+    {id:"cancer", l:"Cancer", short:"Dents abîmées par la chimiothérapie", src:"hyp",
+     srcTxt:"Cas construit, pas un devis : deux postes déjà sourcés additionnés — soins conservateurs 440 € (dont 330 € d'assurance obligatoire) + implant complet ≈ 2 000 € (aucun remboursement). Aucun barème public ne chiffre un cas oncologique : à remplacer par un devis réel.",
+     story:"Après une chimiothérapie, les dents sont fragilisées. Trois caries à soigner, et une dent trop abîmée : elle est extraite, puis remplacée par un implant.",
+     conds:["Cancer diagnostiqué après la souscription à Dentalia Up","Plan de traitement dentaire obligatoire, soumis à l'acceptation du conseiller médical","Un seul plafond de 4 000 € par assuré, pour toute la vie — il ne se renouvelle pas"],
+     billed:2440, ao:330, kind:"cancer", rate:1.00, cap:4000, wait:0,
+     teach:"100 % des frais restants, sans stage d'attente et sans condition d'ancienneté : comme l'accident, la garantie joue dès le premier jour — mais seulement pour un cancer diagnostiqué après la souscription. Le plafond de 4 000 € est un plafond de vie par assuré, pas annuel : il ne se reconstitue pas, et une chimiothérapie appelle souvent plusieurs séries de soins. Le montant remboursé ici est donc à lire comme une part du plafond déjà consommée. Le plan de traitement doit être accepté par le conseiller médical ; selon les conditions générales, il est à déposer au plus tard un an après la fin du traitement oncologique."},
   ];
-  /* Le scénario « soins dentaires liés à un cancer » est retiré : aucun barème public ne permet
-     de chiffrer ce reste à charge. À reconstituer avec le service Oncologie ou des devis réels. */
 
   /* ===================== ÉTAT ===================== */
   var S = {
@@ -675,6 +848,8 @@
     dev:{},   // devis saisi par scénario d'hospitalisation
     devD:{},  // devis saisi par scénario dentaire : {b: montant facturé, a: part de l'assurance obligatoire}
     dentElsewhere:{},  // personne déjà couverte pour ses dents ailleurs
+    hospiElsewhere:{}, // personne déjà couverte par une assurance hospitalisation similaire : true | "employer" | "other"
+                       // « employer » (assurance collective de l'employeur) est la condition d'accès à Continuité
     scD:"prevention", dYear:"y4", dVisit:true, dDerog:false,
     plan:"care",            // formule mise en avant dans les comparaisons
     closeH:null,            // null | "none" | "open"
@@ -717,10 +892,10 @@
      ["BIM plutôt qu'une question sur les revenus","un statut déjà connu de la mutualité, aucune donnée financière demandée."]],
 
     [["Des cartes, pas une liste","61 avantages en liste, c'est illisible en entretien. En cartes, le conseiller balaie et s'arrête sur ce qui parle."],
-     ["Trois filtres, un geste chacun","Pour qui · Domaine · Affichage, chacun avec son compteur calculé en ignorant sa propre dimension."],
+     ["Trois filtres, un geste chacun","Pour qui · Domaine · Affichage, chacun avec son compteur calculé en ignorant sa propre dimension. Dans « Pour qui », « Tout le foyer » vient en premier (c'est la vue par défaut), puis une puce par personne ; recliquer la puce active revient à « Tout le foyer ». Avec une seule personne, la ligne disparaît : un filtre à une seule valeur ne filtre rien."],
      ["Les prénoms remplacent les codes","« Léa » au lieu de « E1 ». C'est tout l'intérêt d'avoir nommé les personnes à l'étape 1."],
      ["Sélection par personne, pas en quantité","on sait QUI est concerné et le récapitulatif devient nominatif."],
-     ["Les non applicables restent visibles, avec leur raison","« dès 65 ans » en clair désamorce le soupçon d'oubli."],
+     ["Ce que le foyer ne peut pas avoir a sa propre vue","« Non applicables » dans Affichage réunit les avantages dont personne dans le foyer ne peut bénéficier, chacun avec sa raison (« dès 65 ans »…). Le prospect voit que rien n'a été oublié, et le conseiller a la réponse quand on lui demande « et ça ? ». Dans cette vue, « Pour qui » est grisé : par définition, personne n'y a droit."],
      ["Récurrent et ponctuel séparés","un plafond annuel et une prime de naissance ne s'additionnent pas."]],
 
     [["Le chiffre du haut est l'argument","une seule figure dominante. Tout le reste est justification."],
@@ -730,17 +905,17 @@
 
     [["Cinq cas, cinq sources, zéro chiffre inventé","les cinq scénarios reprennent des estimations de coût de la Clinique Saint-Jean, relevées en chambre commune et en chambre particulière, et le modèle les reproduit à l'euro près. Les quatre scénarios inventés de la version précédente ont été retirés puis remplacés par des relevés. C'est ce qui permet au conseiller de défendre chaque montant devant un client — ou devant Compliance."],
      ["Un devis réel remplace le scénario","tous les postes sont saisissables : le prospect qui arrive avec un devis d'hôpital le recopie et voit son cas, pas un exemple. Le total se recalcule à la frappe, les champs modifiés sont marqués d'un point, et « Revenir au scénario » restaure les valeurs de départ. Le montant vient en premier, dans l'ordre où on le lit sur un devis."],
-     ["Le pourcentage d'honoraires est le vrai levier","0, 100, 200 ou 300 % — c'est la variable qui fait la facture, et celle que le prospect ne connaît jamais avant d'être devant le guichet. À 0 % (médecin conventionné), les trois formules se rejoignent ; à 300 %, seule Plus couvre tout. Un seul geste montre les deux extrêmes."],
+     ["Le pourcentage d'honoraires est le vrai levier","0, 100, 200 ou 300 % — c'est la variable qui fait la facture, et celle que le prospect ne connaît jamais avant d'être devant le guichet. À 0 % (médecin conventionné), les trois formules se rejoignent ; à 300 %, seule Plus couvre les honoraires — avec une franchise de 150 € dans les hôpitaux qui facturent plus de 200 %, que la brochure signale en note. Un seul geste montre les deux extrêmes."],
      ["Quatre cartes, dont « sans assurance », et jamais zéro par complaisance","la colonne de référence est celle où l'on ne paie rien et où l'on porte tout : sans elle, le prospect compare trois prix entre eux au lieu de comparer un risque à une prime. Et les restes à charge ne sont pas arrondis à zéro — 155 € de chambre facturés contre 125 € remboursés au mieux, il reste 30 € par nuit avec Care ou Plus, 55 € avec Smart. Aucune formule ne ramène la chambre particulière à zéro. L'afficher est ce qui évite la réclamation à la première facture."],
      ["Chambre particulière ou double, en un geste","en chambre double la loi interdit les suppléments : la facture s'effondre et les formules se rejoignent. Le montrer est plus honnête que de le taire."],
      ["La Garantie Maladies graves attend son cas chiffré","elle couvre l'ambulatoire, que le simulateur hospitalier ne chiffre pas — aucun scénario ne peut donc la démontrer aujourd'hui, et l'écran le dit au lieu de laisser croire le contraire. Dès qu'une source existera, l'ambulatoire s'affichera en ligne séparée, pour ne pas laisser penser qu'Hospitalia le prend en charge."],
-     ["La vente se clôture ici, pas trois écrans plus loin","« Continuer sans assurance » et « Sélectionner une assurance » côte à côte, même poids visuel. Le refus doit rester un chemin normal, pas un lien gris en bas de page."],
-     ["Souscription personne par personne, rien de pré-coché","un foyer souscrit rarement pour tout le monde : pouvoir cocher un seul membre évite le tout-ou-rien qui fait échouer la vente. Le tableau s'ouvre sur « Aucune » partout — une formule pré-sélectionnée serait un opt-out déguisé, et surtout elle ferait signer un choix que personne n'a formulé."],
-     ["Le matériel et les médicaments sont le piège du modèle","Hospitalia couvre séjour, pharmacie et matériel intégralement — sauf ce qui n'a aucune intervention de l'assurance obligatoire : 50 %, sous plafond (Smart 1 250 € en chambre particulière et 2 500 € en commune, Care et Plus 5 000 €). Le simulateur hospitalier ne distingue pas les deux statuts, donc les montants sont à renseigner à la main et l'écran avertit tant qu'ils sont vides. Sur la prothèse de genou, le reste à charge passe de 150 € à 632 € avec Care — et 482 € restent dus même en chambre commune, ce qui casse le message « en commune, tout est couvert ». Sur ces cinq scénarios le taux de 50 % est seul décisif : les plafonds ne se déclenchent qu'au-delà de 2 500 € de frais sans intervention AO."]],
+     ["La vente se clôture ici, pas trois écrans plus loin","« Continuer sans assurance » et « Sélectionner une assurance » côte à côte, même poids visuel. Le refus est un chemin normal, pas un lien gris en bas de page : il est noté puis fait passer directement à l'étape suivante, sans écran de confirmation. En revenant, le conseiller trouve « Sans assurance pour l'instant » et un bouton « Revoir les formules »."],
+     ["Une formule par personne, rien de pré-coché, mais pas au hasard","la formule se choisit personne par personne, et le tableau s'ouvre sur « Aucune » partout — une formule pré-sélectionnée serait un opt-out déguisé, et surtout elle ferait signer un choix que personne n'a formulé. Mais la brochure Hospitalia pose une règle : on souscrit aussi pour toutes les personnes à charge, sauf partenaire, cohabitant ou enfants déjà couverts par une assurance similaire. Comme pour Dentalia, laisser un membre de côté demande donc une raison (« déjà couvert ailleurs »), et un avertissement s'affiche tant qu'elle manque. L'avertissement ne bloque pas : le conseiller reste maître du dossier. Continuité suit une autre logique : la fiche d'information 2026 en fait un complément de l'assurance de l'employeur, pas une option de Smart, Care ou Plus. Elle demande donc de savoir si la personne est assurée par son employeur, et elle remplace la formule au lieu de s'y ajouter. Une seule question couvre les deux règles : « déjà couvert ailleurs », puis par qui — l'employeur ouvre Continuité, un autre assureur dispense simplement de souscrire."],
+     ["Le matériel et les médicaments sont le piège du modèle","Hospitalia couvre séjour, pharmacie et matériel intégralement — sauf ce qui n'a aucune intervention de l'assurance obligatoire : 50 %, sous plafond (Smart 1 250 € en chambre particulière et 2 500 € en commune, Care et Plus 5 000 €). Le simulateur hospitalier ne distingue pas les deux statuts, donc les montants sont à renseigner à la main et l'écran avertit tant qu'ils sont vides. Sur la prothèse de genou, le reste à charge passe de 300 € à 783 € avec Plus (franchise de 150 € comprise) — et 483 € restent dus même en chambre commune, ce qui casse le message « en commune, tout est couvert ». Sur ces cinq scénarios le taux de 50 % est seul décisif : les plafonds ne se déclenchent qu'au-delà de 2 500 € de frais sans intervention AO."]],
 
     [["Dentalia a son propre écran","mélangée à l'hospitalisation, la simulation dentaire passait inaperçue. Elle a six protections, six régimes et une logique d'ancienneté qui lui sont propres. Un bandeau « Simulation » ouvre l'écran : les montants par défaut sont fictifs, et il le dit avant le premier chiffre."],
      ["Le rappel de règle s'adresse au conseiller","Dentalia se souscrit pour tout le ménage, sauf membre déjà couvert ailleurs. Ce n'est pas un argument de vente mais une règle produit que le conseiller doit avoir sous les yeux — d'où un encadré distinct, en pointillé, marqué « rappel conseiller » et visuellement séparé de ce qui parle au prospect."],
-     ["L'ancienneté est le curseur central","le même implant rembourse 350 € en année 1 et 1 920 € en année 10. C'est la démonstration la plus forte du produit, et elle est arithmétique."],
+     ["L'ancienneté est le curseur central — sauf pour l'accident et le cancer","le même implant rembourse 350 € en année 1 et 1 920 € en année 10. C'est la démonstration la plus forte du produit, et elle est arithmétique. Deux garanties y échappent : l'accident (5 000 € par accident) et le cancer (4 000 € par assuré, pour toute la vie), sans stage ni ancienneté — l'échelle y est plate, et c'est le message. Le cas cancer est le seul cas construit de l'écran : sa brochure donne le taux, le plafond et les conditions, mais aucun barème public ne chiffre le reste à charge. Il additionne donc deux postes déjà sourcés (curatif et implant) et l'écran le dit en tête, comme une hypothèse. Le plafond cancer est un plafond de vie : l'écran affiche la part consommée et ce qu'il reste pour la suite des soins, car c'est ce qu'un client doit retenir — il ne se renouvelle pas."],
      ["Le toggle « vu un dentiste l'an dernier »","50 % ou 80 % sur le curatif et sur les prothèses, implants et parodontologie (pas sur le préventif ni l'orthodontie). Une condition du produit — une visite remboursée l'an dernier — à annoncer avant la vente, pas après."],
      ["Le devis remplace l'exemple, et l'unité est nommée","deux montants qui se lisent sur un devis : ce que facture le dentiste, puis la part de l'assurance obligatoire. Le reste à charge est calculé, et c'est lui que Dentalia Up rembourse — un vendeur qui recopie le devis n'a plus à faire la soustraction de tête. Taux et plafond ne sont pas saisissables : règles produit, pas données de devis. Et le titre dit l'unité : frais, taux et plafond concernent <b>une seule personne soignée</b>, la prime en pied de carte est celle du <b>foyer</b>. Sans ça, un parent croit que le plafond de 1 400 € est partagé entre ses enfants — il est individuel."],
      ["L'échelle d'ancienneté n'est pas une offre","présentée en carte, elle se lisait comme une troisième formule à choisir. En barres, sous un titre de lecture et sans état sélectionnable, elle redevient ce qu'elle est : le plafond maximum de chaque moment du contrat. Elle affiche le plafond du produit, pas un montant recalculé à chaque saisie — un maximum ne se lit pas comme une promesse de remboursement, et la note le dit."],
@@ -749,7 +924,7 @@
 
     [["Un tableau, une ligne par personne","c'est le panier. Tout se modifie ici sans revenir en arrière, et le total se recalcule à vue."],
      ["Les limites d'âge sont bloquantes, pas décoratives","au-delà de 67 ans, Care et Plus sont désactivés dans le tableau. L'outil le refuse à l'écran, il ne le découvre pas au dossier."],
-     ["Les options dépendent d'une formule active","Continuité et Maladies graves sont grisées pour qui n'a pas d'Hospitalia. La dépendance se voit au lieu de produire une erreur."],
+     ["Chaque option a sa condition, et elle se voit","Maladies graves demande une formule Smart, Care ou Plus ; Continuité demande une assurance d'employeur déjà en place et remplace la formule au lieu de s'y ajouter. L'interrupteur grisé et la mention « si assuré par l'employeur » rendent la condition visible au lieu de produire une erreur au dossier."],
      ["Dire ce qui n'est pas couvert, ici aussi","stage de 3 mois, affections préexistantes, prime qui monte avec l'âge."]],
 
     [["Payé face à protégé, pas payé face à récupéré","trois blocs distincts. Les additionner serait malhonnête — un plafond de couverture n'est pas un revenu."],
@@ -764,6 +939,28 @@
   var $ = function(s){ return document.querySelector(s); };
   var screenEl = $("#screen"), stepperEl = $("#stepper"), notesEl = $("#notes");
   function eur(v,d){ return v.toLocaleString("fr-BE",{minimumFractionDigits:d||0,maximumFractionDigits:d||0}) + " €"; }
+  /* ---------- Conseiller : nom saisi dans l'en-tête, repris dans le récapitulatif et l'export PDF ---------- */
+  var ADV_KEY = "pmut-plansante-conseiller";
+  function advName(){ return (S.advisor || "").trim(); }
+  function advInitials(){
+    var n = advName(); if(!n) return "?";
+    return n.split(/[\s.\-]+/).filter(Boolean).slice(0,2).map(function(w){ return w.charAt(0).toUpperCase(); }).join("");
+  }
+  function syncAdvisor(){
+    var av = document.getElementById("advAvatar"); if(av) av.textContent = advInitials();
+    var els = document.querySelectorAll(".js-adv");
+    for(var i=0;i<els.length;i++) els[i].innerHTML = advByInner();
+  }
+  function advByInner(){
+    var n = advName();
+    return n
+      ? '<span class="who-chip"><span class="avatar" aria-hidden="true">'+esc(advInitials())+'</span>'+
+        '<span>Simulation préparée par <b>'+esc(n)+'</b>, votre conseiller Partenamut</span></span>'+
+        '<span>le '+todayStr()+'</span>'
+      : '<span class="missing">Nom du conseiller non renseigné — complétez-le en haut à droite avant l\'export.</span>';
+  }
+  function advBy(){ return '<div class="advby js-adv">'+advByInner()+'</div>'; }
+
   function todayStr(){
     try{ return new Date().toLocaleDateString("fr-BE",{day:"2-digit",month:"long",year:"numeric"}); }
     catch(e){ return "2026"; }
@@ -817,6 +1014,7 @@
       if(!S.sel[id].length) delete S.sel[id];
     });
     if(S.who !== "all" && S.who !== "me" && S.who !== "family" && !S.ppl[+S.who]) S.who = "all";
+    if(S.ppl.length < 2) S.who = "all";
     ["hospi","cont","mg","dent"].forEach(function(k){
       Object.keys(S.sub[k]).forEach(function(i){ if(!S.ppl[+i]) delete S.sub[k][i]; });
     });
@@ -826,10 +1024,16 @@
     });
     // Dentalia Up : pas de souscription au-delà de 64 ans
     Object.keys(S.sub.dent).forEach(function(i){ if(!dentOk(S.ppl[+i].age)) delete S.sub.dent[i]; });
-    // options sans formule active
-    ["cont","mg"].forEach(function(k){
-      Object.keys(S.sub[k]).forEach(function(i){ if(!S.sub.hospi[i]) delete S.sub[k][i]; });
+    // Maladies graves : option d'une formule Smart, Care ou Plus
+    Object.keys(S.sub.mg).forEach(function(i){ if(!S.sub.hospi[i]) delete S.sub.mg[i]; });
+    /* Continuité (fiche IPID 2026) : complément de l'assurance collective de l'employeur, jusqu'à 64 ans à la
+       souscription, et exclusive de Smart, Care et Plus — elle sert d'étape avant le transfert vers l'une d'elles. */
+    Object.keys(S.hospiElsewhere).forEach(function(i){ if(!S.ppl[+i] || S.sub.hospi[i]) delete S.hospiElsewhere[i]; });
+    Object.keys(S.sub.cont).forEach(function(i){
+      if(S.hospiElsewhere[i] !== "employer" || !contOk(S.ppl[+i].age) || S.sub.hospi[i]) delete S.sub.cont[i];
     });
+    // Garantie Maladies graves : pas de souscription au-delà de 67 ans
+    Object.keys(S.sub.mg).forEach(function(i){ if(!mgOk(S.ppl[+i].age)) delete S.sub.mg[i]; });
     if(!planAllowed(S.plan)) S.plan = "smart";
   }
   function planOkFor(k,age){ return k === "smart" || age <= 67; }
@@ -859,7 +1063,7 @@
       var k = S.sub.hospi[i];
       if(k) h += pH(k,p.age);
       if(S.sub.cont[i]){ var cc = pC(p.age); if(cc) c += cc; }
-      if(S.sub.mg[i]) m += MG_PRIME;
+      if(S.sub.mg[i]) m += pMG(p.age);
       if(S.sub.dent[i]) d += pD(p.age);
     });
     return {hospi:h, cont:c, mg:m, dent:d, total:h+c+m+d};
@@ -921,9 +1125,12 @@
     var payTm    = (billTm - noAO) + Math.min(noAO * MAT_RATE, cap);
     var pay      = payRoom + payHon + payTm;
     if(g.cap) pay = Math.min(pay, g.cap);
+    /* Franchise Plus : déduite du remboursement (brochure p. 9 et p. 11, note 3) */
+    var fr = (plan === "plus" && room === "single" && !p.oneDay && p.honPct > 200) ? Math.min(FRANCHISE_PLUS, pay) : 0;
+    pay -= fr;
     var payAmb = mg ? Math.min(amb, MG_CAP) : 0;
     return {bill:bill, billRoom:billRoom, billHon:billHon, billTm:billTm, billAmb:amb, noAO:noAO,
-            pay:pay, payRoom:payRoom, payHon:payHon, payTm:payTm, payAmb:payAmb,
+            pay:pay, payRoom:payRoom, payHon:payHon, payTm:payTm, payAmb:payAmb, fr:fr,
             rest:Math.max(bill - pay, 0) + Math.max(amb - payAmb, 0)};
   }
 
@@ -959,6 +1166,8 @@
   function matchWho(a){
     var el = eligIdx(a);
     if(S.who === "all") return true;
+    /* Vue « Non applicables » : personne du foyer n'y a droit, le filtre « Pour qui » n'a donc pas d'objet. */
+    if(S.state === "off") return true;
     if(S.who === "me")     return el.indexOf(0) >= 0 || el.indexOf(-1) >= 0;
     if(S.who === "family") return el.some(function(i){ return i > 0; }) || el.indexOf(-1) >= 0;
     return el.indexOf(+S.who) >= 0 || el.indexOf(-1) >= 0;
@@ -966,6 +1175,7 @@
   function matchState(a){
     if(S.state === "picked") return isPicked(a);
     if(S.state === "elig")   return applicable(a);
+    if(S.state === "off")    return !applicable(a);
     return true;
   }
   function matchQ(a){
@@ -1090,21 +1300,21 @@
   function s2(){
     pruneAll();
     var t = totals(), vis = visible();
-    var whoBase = S.ppl.length > 1
-      ? [{v:"all",l:"Tout le foyer"},{v:"me",l:pname(0)},{v:"family",l:"Ma famille"}]
-      : [{v:"all",l:"Tout"}];
-    var whoChips = whoBase
-      .concat(S.ppl.map(function(_,i){ return {v:String(i), l:pname(i)}; }).slice(S.ppl.length > 1 ? 1 : 0))
+    /* « Tout le foyer » en premier (vue par défaut), puis une puce par personne. Recliquer la puce active revient à « Tout le foyer ».
+       Avec une seule personne, la ligne disparaît (un filtre à une seule valeur ne filtre rien). */
+    var multi = S.ppl.length > 1, offView = S.state === "off";
+    var whoChips = !multi ? "" : [{v:"all",l:"Tout le foyer"}]
+      .concat(S.ppl.map(function(_,i){ return {v:String(i), l:pname(i)}; }))
       .map(function(o){
         var n = countWith("who",o.v);
-        return '<button type="button" class="chip" data-who="'+o.v+'" aria-pressed="'+(S.who===o.v?"true":"false")+'"'+(n?"":" disabled")+'>'+esc(o.l)+'<span class="c">'+n+'</span></button>';
+        return '<button type="button" class="chip" data-who="'+o.v+'" aria-pressed="'+(S.who===o.v?"true":"false")+'"'+((n && !offView)?"":" disabled")+'>'+esc(o.l)+'<span class="c">'+n+'</span></button>';
       }).join("");
     var catChips = [{v:"all",l:"Tous"}].concat(CAT.map(function(c){ return {v:c[0],l:c[1]}; }))
       .map(function(o){
         var n = countWith("cat",o.v);
         return '<button type="button" class="chip" data-cat="'+o.v+'" aria-pressed="'+(S.cat===o.v?"true":"false")+'"'+(n?"":" disabled")+'>'+esc(o.l)+'<span class="c">'+n+'</span></button>';
       }).join("");
-    var stateChips = [{v:"elig",l:"Applicables"},{v:"picked",l:"Retenus"},{v:"all",l:"Tout voir"}]
+    var stateChips = [{v:"elig",l:"Applicables"},{v:"picked",l:"Retenus"},{v:"off",l:"Non applicables"},{v:"all",l:"Tout voir"}]
       .map(function(o){
         return '<button type="button" class="chip" data-state="'+o.v+'" aria-pressed="'+(S.state===o.v?"true":"false")+'">'+esc(o.l)+'<span class="c">'+countWith("state",o.v)+'</span></button>';
       }).join("");
@@ -1131,11 +1341,11 @@
 
     return ''+
     '<h2>Passons vos avantages en revue<span class="anno-mark">1</span></h2>'+
-    '<p class="sub">'+AV.length+' avantages au catalogue. Pour chacun, indiquez qui, dans votre foyer, est concerné.</p>'+
+    '<p class="sub">'+AV.length+' avantages au catalogue. Pour chacun, indiquez qui, dans votre foyer, est concerné.'+(multi?'':'<span class="anno-mark">3</span>')+'</p>'+
     '<div class="cols cat">'+
       '<div>'+
         '<div class="filters">'+
-          '<div class="frow"><span class="lbl">Pour qui<span class="anno-mark">3</span></span>'+whoChips+'</div>'+
+          (multi ? '<div class="frow"><span class="lbl">Pour qui<span class="anno-mark">3</span></span>'+whoChips+'</div>' : '')+
           '<div class="frow"><span class="lbl">Domaine</span>'+catChips+'</div>'+
           '<div class="frow"><span class="lbl">Affichage</span>'+stateChips+
             '<span class="search"><span class="lbl">Chercher</span><input type="text" id="qsearch" value="'+esc(S.q)+'" placeholder="sport, dentiste, psy…"></span></div>'+
@@ -1157,7 +1367,7 @@
             return '<tr><td style="font-size:12px">'+esc(a.l)+'</td><td class="n" style="font-size:11px;color:var(--ink-2)">'+esc(picks(a).map(pshort).join(", "))+'</td></tr>';
           }).join("")+'</tbody></table></div>' : '')+
       '</div>'+
-      '<p style="font-size:11.5px;color:var(--muted);margin:12px 0 0">Les cartes en pointillé ne s\'appliquent pas à ce foyer ; leur raison est écrite dessus.<span class="anno-mark">5</span></p>'+
+      '<p style="font-size:11.5px;color:var(--muted);margin:12px 0 0">Les cartes en pointillé ne s\'appliquent pas à ce foyer ; leur raison est écrite dessus. « Non applicables » les réunit.<span class="anno-mark">5</span></p>'+
       '</div>'+
     '</div>';
   }
@@ -1215,6 +1425,9 @@
     } else if(src === "mixte"){
       body = '<b>Montants partiellement réels.</b> La chambre commune reprend une estimation hospitalière ; la part liée à la chambre particulière est reconstituée. '+
         'Une facture réelle dépend de l\'hôpital, du médecin et du séjour. Saisissez votre estimation ci-dessous pour un calcul adapté, sans valeur contractuelle.';
+    } else if(kind === "dentaire"){
+      body = '<b>Cas construit.</b> Aucun barème public ne chiffre des soins dentaires liés à un cancer : le devis par défaut additionne deux postes déjà sourcés (soins conservateurs et implant). '+
+        'Le taux, le plafond et les conditions sont ceux de la garantie ; les montants, eux, sont une hypothèse. Saisissez un devis réel dans les champs ci-dessous — le remboursement dépendra aussi de l\'acceptation du plan de traitement par le conseiller médical, sans valeur contractuelle avant cela.';
     } else {
       body = '<b>Montants fictifs.</b> Les factures de ce scénario sont un exemple construit pour la démonstration, pas un devis. '+
         'Une facture réelle dépend de l\'hôpital, du médecin, de la durée du séjour et de votre situation. '+
@@ -1275,35 +1488,40 @@
           '<div><span>Chambre</span><b>'+eur(r.payRoom)+' / '+eur(r.billRoom)+'</b></div>'+
           '<div><span>Honoraires</span><b>'+eur(r.payHon)+' / '+eur(r.billHon)+'</b></div>'+
           '<div><span>Séjour et matériel</span><b>'+eur(r.payTm)+' / '+eur(r.billTm)+'</b></div>'+
+          (r.fr ? '<div><span>Franchise Plus</span><b>− '+eur(r.fr)+'</b></div>' : '')+
           (amb ? '<div class="amb"><span>Ambulatoire '+(S.mgDemo && k ? '(Maladies graves)' : '(non couvert)')+'</span><b>'+eur(r.payAmb)+' / '+eur(amb)+'</b></div>' : '')+
         '</div>'+
         '<span class="prime">'+(k
           ? eur(primeHospiM(k),2)+'/mois pour '+pplFor(k).length+' pers.'+
             (pplNotFor(k).length ? ' <span class="est" title="Souscription jusqu\'à 67 ans">('+esc(pplNotFor(k).map(function(p){return p.n;}).join(", "))+' non éligible'+(pplNotFor(k).length>1?'s':'')+')</span>' : '')+
-            '<br>chambre '+eur(g.room)+'/j · honoraires '+g.hon+' %'
+            '<br>chambre '+eur(g.room)+'/j · honoraires '+g.hon+' %'+(k==="plus"?' · franchise '+eur(FRANCHISE_PLUS)+' si hôpital &gt; 200 %':'')
           : 'aucune prime<br>vous portez la totalité du risque')+'</span>'+
       '</button>';
     }
 
     var cmpRows = [
       ["Prime mensuelle du foyer", function(g,k){ return eur(primeHospiM(k),2) + " · " + pplFor(k).length + " pers."; }],
-      ["Chambre commune", function(){ return "100 % remboursé"; }],
+      ["Chambre commune", function(){ return "pris en charge intégralement, hors frais divers"; }],
       ["Supplément chambre particulière", function(g){ return "jusqu'à "+eur(g.room)+"/jour"; }],
       ["Suppléments d'honoraires", function(g){ return "jusqu'à "+g.hon+" % du tarif légal"; }],
       ["Hospitalisation de jour", function(){ return "chambre 100 €/j · honoraires 100 %"; }],
       ["Plafond annuel", function(g){ return g.cap ? "jusqu'à "+eur(g.cap)+"/an" : "aucun plafond"; }],
       ["Soins avant l'hospitalisation", function(g){ return g.pre+" jours"; }],
       ["Soins après l'hospitalisation", function(g){ return g.post+" jours"; }],
-      ["Hospitalia Assist", function(g){ return g.assist ? "inclus" : "non inclus"; }],
+      ["Aide pendant ou après le séjour", function(g){ return g.assist ? "Hospitalia Assist : 40 h max., 2 événements/an" : "garde d'enfants à domicile, garde-malade après un séjour de jour"; }],
+      ["Accompagnement d'un enfant (rooming-in)", function(g,k){ return k==="smart" ? "totalité en chambre commune · 60 €/jour max. en chambre particulière" : "totalité"; }],
+      ["Accompagnement d'un adulte (rooming-in)", function(){ return "jusqu'à 30 €/jour"; }],
+      ["Accouchement à domicile", function(g,k){ return k==="smart" ? "forfait de 300 €" : "forfait de 700 €"; }],
+      ["Hospitalisation à l'étranger (hors One Day)", function(g,k){ return k==="smart" ? "200 €/jour max." : "360 €/jour max."; }],
       ["Âge maximum à la souscription", function(g){ return g.age; }],
       ["Stage d'attente", function(){ return "3 mois"; }],
-      ["Franchise", function(g,k){ return k==="plus" ? "possible dans certains hôpitaux" : "aucune"; }],
-      ["Option Maladies graves", function(){ return "ambulatoire jusqu'à "+eur(MG_CAP)+"/an"; }]
+      ["Franchise", function(g,k){ return k==="plus" ? "150 €, une fois par an, dès 1 nuit en chambre particulière dans certains hôpitaux (plus de 200 %) · aucune en One Day" : "aucune"; }],
+      ["Option Maladies graves", function(){ return "ambulatoire jusqu'à "+eur(MG_CAP)+"/an · souscription jusqu'à 67 ans"; }]
     ];
 
     return ''+
     '<h2>Et si vous étiez hospitalisé demain ?<span class="anno-mark">1</span></h2>'+
-    '<p class="sub">Six situations, toutes chiffrées sur des estimations hospitalières réelles. Les remboursements appliquent les plafonds publiés de chaque formule.</p>'+
+    '<p class="sub">Cinq situations, toutes chiffrées sur des estimations hospitalières réelles. Les remboursements appliquent les plafonds publiés de chaque formule.</p>'+
     simWarn(anyEdited(sc), "hospitalisation", sc.src)+
     '<div class="cols sc">'+
       '<div>'+picker+'</div>'+
@@ -1332,7 +1550,7 @@
                   return '<button type="button" class="chip" data-devpct="'+v+'" aria-pressed="'+(P.honPct===v?"true":"false")+'"'+
                          (S.room!=="single"?" disabled":"")+' style="padding:5px 9px;font-size:12px">'+v+' %</button>';
                 }).join("") +'</div>'+
-                '<span class="qh">du tarif légal — 0 % si le médecin est conventionné</span>'+
+                '<span class="qh">du tarif légal — 0 % si le médecin est conventionné. Au-delà de 200 %, Plus applique une franchise de 150 €.</span>'+
               '</div>'+
               devField(sc,"tm","Séjour, pharmacie, matériel","€",false)+
               (P.mat ? '<label class="qf'+(isEdited(sc,"matNoAO")?" ed":"")+'">'+
@@ -1363,7 +1581,7 @@
         (pplNotFor("care").length
           ? '<div class="warn" style="margin-top:14px"><b>Limite d\'âge, personne par personne.</b> '+
             esc(pplNotFor("care").map(function(p){ return p.n+" ("+p.age+" ans)"; }).join(", "))+
-            (pplNotFor("care").length>1?' ne peuvent':' ne peut')+' pas souscrire Care ni Plus — la souscription s\'arrête à 67 ans. Smart reste ouverte sans limite d\'âge. '+
+            (pplNotFor("care").length>1?' ne peuvent':' ne peut')+' pas souscrire Care ni Plus — la souscription s\'arrête à 67 ans inclus, sauf transfert depuis une assurance hospitalisation mutualiste similaire. Smart reste ouverte sans limite d\'âge. '+
             'Les autres membres du foyer gardent accès aux trois formules, et les primes ci-dessus ne comptent que les personnes éligibles.</div>'
           : '')+
         ((P.mat + P.med) && !(P.matNoAO + P.medNoAO)
@@ -1373,7 +1591,7 @@
             'Le simulateur hospitalier ne fait pas la distinction. Renseignez les montants ci-dessus pour voir l\'effet — jusqu\'à '+
             eur(Math.min((P.mat + P.med) * MAT_RATE, matCap("smart",S.room)))+' de plus à charge sur ce scénario.</div>'
           : '')+
-        (S.room==="double" ? '<div class="warn" style="margin-top:14px">En chambre double ou commune, la loi interdit les suppléments de chambre et d\'honoraires. La facture tombe au séjour, à la pharmacie et au matériel'+((P.matNoAO+P.medNoAO)?' — dont '+eur(P.matNoAO+P.medNoAO)+' sans intervention AO, remboursés à '+(MAT_RATE*100)+' % seulement (plafond '+eur(matCap("smart","double"))+' en Smart, '+eur(matCap("care","double"))+' en Care et Plus)':', couverts intégralement')+'.</div>' : '')+
+        (S.room==="double" ? '<div class="warn" style="margin-top:14px">En chambre double ou commune, la loi interdit les suppléments de chambre et d\'honoraires. La facture tombe au séjour, à la pharmacie et au matériel'+((P.matNoAO+P.medNoAO)?' — dont '+eur(P.matNoAO+P.medNoAO)+' sans intervention AO, remboursés à '+(MAT_RATE*100)+' % seulement (plafond '+eur(matCap("smart","double"))+' en Smart, '+eur(matCap("care","double"))+' en Care et Plus)':', couverts intégralement')+'. Frais divers (connexion internet, fleurs, télévision, frigo) : jamais remboursés, quelle que soit la formule. Le plafond annuel de Smart ('+eur(HOSPI.smart.cap)+') reste d\'application.</div>' : '')+
         (amb && !S.mgDemo ? '<div class="warn" style="margin-top:14px">Les '+eur(amb)+' de frais ambulatoires restent entièrement à charge : aucune formule Hospitalia ne les couvre. Activez la Garantie Maladies graves pour voir la différence.</div>' : '')+
         '<p style="font-size:12.5px;color:var(--ink-2);margin:14px 0 0;border-top:1px solid var(--line-soft);padding-top:12px"><b>À retenir.</b> '+esc(sc.teach)+'</p>'+
         '<details style="margin-top:16px"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px 0">Comparer les trois formules ligne par ligne</summary>'+
@@ -1403,7 +1621,7 @@
       var off = x.kidsOnly && !hasKid;
       return '<button type="button" class="scbtn" data-scd="'+x.id+'" aria-pressed="'+(x.id===S.scD?"true":"false")+'"'+(off?' disabled style="opacity:.45"':'')+'>'+
              '<span class="h">'+esc(x.l)+'</span><span class="p">'+esc(off?"aucun enfant dans le foyer":x.short)+'</span>'+
-             '<span class="flag">'+(x.wait?'stage '+x.wait+' mois':'sans stage')+' · '+(x.src==="reel"?"tarifs réels":"hypothèse")+'</span></button>';
+             '<span class="flag">'+(x.wait?'stage '+x.wait+' mois':'sans stage')+' · '+(x.src==="reel"?"tarifs réels":"cas construit")+'</span></button>';
     }).join("") +'</div>'+
     '<div class="panel" style="margin-top:12px">'+
       '<span class="lbl">Depuis quand assuré ?<span class="anno-mark">3</span></span>'+
@@ -1433,7 +1651,7 @@
 
     return ''+
     '<h2>Et pour vos dents ?<span class="anno-mark">1</span></h2>'+
-    '<p class="sub">Six protections, cinq cas chiffrés sur les tarifs INAMI et les fourchettes de prix publiées. Le remboursement dépend du type de soin, de votre ancienneté et — pour le curatif et les prothèses — de votre dernière visite.</p>'+
+    '<p class="sub">Six protections, six cas : cinq chiffrés sur les tarifs INAMI et les fourchettes de prix publiées, un cas construit (le cancer, faute de barème public). Le remboursement dépend du type de soin, de votre ancienneté et — pour le curatif et les prothèses — de votre dernière visite.</p>'+
     simWarn(isEditedD(sc), "dentaire", sc.src)+
     '<div class="rulebox" role="note">'+
       '<span class="tagx">Rappel conseiller</span>'+
@@ -1448,6 +1666,7 @@
         '<div class="story">'+
           '<span class="lbl">Le devis — une seule personne soignée<span class="anno-mark">5</span></span>'+
           '<p class="q">'+esc(sc.story)+'</p>'+
+          (sc.conds ? '<ul class="conds"><li class="ct">Ce que dit la garantie</li>'+sc.conds.map(function(c){ return '<li>'+esc(c)+'</li>'; }).join("")+'</ul>' : '')+
           '<div class="quote">'+
             '<div class="qfields two">'+
               '<label class="qf'+(isEditedDf(sc,"b")?" ed":"")+'">'+
@@ -1476,6 +1695,7 @@
               '<div><span class="k">Remboursé</span><span class="v num">'+eur(rOn.pay)+'</span></div>'+
               '<div><span class="k">Stage d\'attente</span><span class="v">'+(sc.wait?sc.wait+" mois":"aucun")+'</span></div>'+
             '</div>'+
+            (sc.kind==="cancer" ? '<p style="margin:0;padding:10px 14px;font-size:12.5px;color:var(--ink-2);border-top:1px solid var(--line-soft)"><b>Plafond de vie :</b> '+eur(rOn.pay)+' utilisés sur '+eur(rOn.cap)+' — il en reste <b class="num">'+eur(Math.max(rOn.cap-rOn.pay,0))+'</b> pour les soins à venir, sans renouvellement.</p>' : '')+
             '<div class="qbar">'+
               '<span class="qstate">'+(isEditedD(sc)
                 ? '<b>Devis saisi.</b> Taux et plafond restent ceux du produit.'
@@ -1503,7 +1723,7 @@
         /* Progression de l'ancienneté : une échelle de lecture, pas une offre à choisir. */
         '<figure class="ladder">'+
           '<figcaption><span class="lbl">Le plafond, selon votre ancienneté<span class="anno-mark">6</span></span>'+
-            '<span class="lscale">montant maximum remboursé · '+({prev:"par an",proth:"tous les 2 ans",ortho:"par vie",acc:"par accident"}[sc.kind]||"")+'</span></figcaption>'+
+            '<span class="lscale">montant maximum remboursé · '+({prev:"par an",proth:"tous les 2 ans",ortho:"par vie",acc:"par accident",cancer:"par assuré, pour toute la vie"}[sc.kind]||"")+'</span></figcaption>'+
           (function(){
             var caps = DENT_YEARS.map(function(y){ return computeD(sc, y.id, S.dVisit, true).cap; });
             var top = Math.max.apply(null, caps) || 1;
@@ -1518,7 +1738,7 @@
           '<p class="lnote">Lecture pour une seule personne assurée. Ce sont des maximums, pas des remboursements garantis : le remboursement réel est le taux appliqué aux frais restants, dans la limite du plafond. Ce n\'est pas une offre à choisir : votre ancienneté est celle que vous aurez le jour du soin'+(sc.kind==="ortho"?' — pour l\'orthodontie, celle du début du traitement (conditions générales 2026, art. 12.1.3)':'')+'.</p>'+
         '</figure>'+
         (rOn.cap===0 && rOn.cost>0 ? '<div class="warn" style="margin-top:14px">Année 1 : le stage d\'attente de 12 mois n\'est pas terminé, rien n\'est remboursé. Une dérogation de stage, sur preuve d\'une assurance dentaire précédente, ouvre un plafond de 350 €.</div>' :
-        rOn.cost*rOn.rate > rOn.cap ? '<div class="warn" style="margin-top:14px">Le plafond de '+eur(rOn.cap)+' est atteint : '+Math.round(rOn.rate*100)+' % de '+eur(rOn.cost)+' ferait '+eur(rOn.cost*rOn.rate)+'.</div>' : '')+
+        rOn.cost*rOn.rate > rOn.cap ? '<div class="warn" style="margin-top:14px">Le plafond de '+eur(rOn.cap)+' est atteint : '+Math.round(rOn.rate*100)+' % de '+eur(rOn.cost)+' ferait '+eur(rOn.cost*rOn.rate)+'.'+(sc.kind==="cancer" ? ' Ce plafond vaut pour toute la vie de l\'assuré : il ne se reconstitue pas.' : '')+'</div>' : '')+
         '<p style="font-size:12.5px;color:var(--ink-2);margin:14px 0 0;border-top:1px solid var(--line-soft);padding-top:12px"><b>À retenir.</b> '+esc(sc.teach)+'</p>'+
         '<details style="margin-top:16px"><summary style="cursor:pointer;font-size:13px;font-weight:600;padding:8px 0">Voir les six protections et la grille tarifaire</summary>'+
           '<div class="tw" style="max-height:none;margin-top:8px"><table class="cmp"><thead><tr><th>Protection</th><th>Remboursement</th><th>Stage</th><th>Plafond</th></tr></thead><tbody>'+
@@ -1541,7 +1761,7 @@
     var isH = which === "H";
     var state = isH ? S.closeH : S.closeD;
     var label = isH ? "une assurance hospitalisation" : "Dentalia Up";
-    var nSub = isH ? Object.keys(S.sub.hospi).length : Object.keys(S.sub.dent).length;
+    var nSub = isH ? Object.keys(S.sub.hospi).length + Object.keys(S.sub.cont).length : Object.keys(S.sub.dent).length;
 
     if(state === "none" && !nSub){
       return '<div class="refused">'+
@@ -1560,37 +1780,70 @@
     return isH ? subPanelH() : subPanelD();
   }
 
+  /* Une seule question pour les deux cas : « déjà couvert ailleurs », puis par qui. L'employeur ouvre Continuité. */
+  function elseCtl(i){
+    var v = S.hospiElsewhere[i] || "";
+    return '<label style="display:flex;gap:7px;align-items:center;font-size:11.5px;color:var(--ink-2);cursor:pointer;margin-top:7px">'+
+        '<button type="button" class="sw" data-hospielse="'+i+'" aria-pressed="'+(v?"true":"false")+'" aria-label="Déjà couvert par une assurance hospitalisation similaire" style="width:30px;height:17px"></button>'+
+        '<span>déjà couvert ailleurs</span></label>'+
+      (v ? '<span class="mini" role="group" aria-label="Couvert par" style="margin-top:6px">'+
+             '<button type="button" data-hospisrc="'+i+'" data-v="employer" aria-pressed="'+(v==="employer"?"true":"false")+'">Employeur</button>'+
+             '<button type="button" data-hospisrc="'+i+'" data-v="other" aria-pressed="'+(v==="other"?"true":"false")+'">Autre assureur</button></span>' : '');
+  }
+
+  /* Cellule Continuité : réservée à une personne assurée par son employeur, jusqu'à 64 ans. */
+  function contCell(i,p){
+    var on = !!S.sub.cont[i], emp = S.hospiElsewhere[i] === "employer", ok = contOk(p.age), cp = pC(p.age);
+    return '<button type="button" class="sw" data-subc="'+i+'" aria-pressed="'+(on?"true":"false")+'" aria-label="Hospitalia Continuité pour '+esc(p.n)+'" '+((emp && ok)?"":"disabled")+'></button>'+
+      (!ok ? '<br><span style="font-size:10.5px;color:var(--muted)">jusqu\'à 64 ans</span>'
+           : emp ? '<br><span style="font-size:10.5px;color:var(--muted)" class="num">'+eur(cp,2)+'</span>'
+                 : '<br><span style="font-size:10.5px;color:var(--muted)">si assuré par l\'employeur</span>');
+  }
+
   function subPanelH(){
     var rows = S.ppl.map(function(p,i){
       var cur = S.sub.hospi[i] || "";
+      var elseTog = cur ? '' : elseCtl(i);
       var opts = '<span class="mini" role="group" aria-label="Formule pour '+esc(p.n)+'">'+
         '<button type="button" data-subh="'+i+'" data-v="" aria-pressed="'+(!cur?"true":"false")+'">Aucune</button>'+
         PLANS.map(function(k){
           var ok = planOkFor(k,p.age);
-          return '<button type="button" data-subh="'+i+'" data-v="'+k+'" aria-pressed="'+(cur===k?"true":"false")+'"'+(ok?"":" disabled title=\"non souscriptible au-delà de 67 ans\"")+'>'+esc(HOSPI[k].l.replace("Hospitalia ",""))+'</button>';
+          return '<button type="button" data-subh="'+i+'" data-v="'+k+'" aria-pressed="'+(cur===k?"true":"false")+'"'+(ok?"":" disabled title=\"non souscriptible au-delà de 67 ans (sauf transfert d\'une assurance hospitalisation mutualiste similaire)\"")+'>'+esc(HOSPI[k].l.replace("Hospitalia ",""))+'</button>';
         }).join("")+'</span>';
       var prime = cur ? pH(cur,p.age) : 0;
       var contP = pC(p.age);
       return '<tr>'+
         '<td class="grow"><b>'+esc(p.n)+'</b><br><span style="font-size:11px;color:var(--muted)">'+p.age+' ans</span></td>'+
-        '<td>'+opts+'</td>'+
-        '<td><button type="button" class="sw" data-subc="'+i+'" aria-pressed="'+(S.sub.cont[i]?"true":"false")+'" aria-label="Continuité" '+(cur?"":"disabled")+'></button>'+
-          (cur && contP ? '<br><span style="font-size:10.5px;color:var(--muted)" class="num">+'+eur(contP,2)+'</span>' : '')+'</td>'+
-        '<td><button type="button" class="sw" data-subm="'+i+'" aria-pressed="'+(S.sub.mg[i]?"true":"false")+'" aria-label="Maladies graves" '+(cur?"":"disabled")+'></button>'+
-          (cur ? '<br><span style="font-size:10.5px;color:var(--muted)" class="num">+'+eur(MG_PRIME,2)+'</span>' : '')+'</td>'+
-        '<td class="n"><b>'+eur(prime + (S.sub.cont[i]&&contP?contP:0) + (S.sub.mg[i]?MG_PRIME:0), 2)+'</b></td>'+
+        '<td>'+opts+elseTog+'</td>'+
+        '<td>'+contCell(i,p)+'</td>'+
+        '<td><button type="button" class="sw" data-subm="'+i+'" aria-pressed="'+(S.sub.mg[i]?"true":"false")+'" aria-label="Maladies graves" '+((cur && mgOk(p.age))?"":"disabled")+'></button>'+
+          (cur ? '<br><span style="font-size:10.5px;color:var(--muted)" class="num">'+(mgOk(p.age) ? '+'+eur(pMG(p.age),2) : 'non souscriptible après 67 ans')+'</span>' : '')+'</td>'+
+        '<td class="n"><b>'+eur(prime + (S.sub.cont[i]&&contP?contP:0) + (S.sub.mg[i]?pMG(p.age):0), 2)+'</b></td>'+
       '</tr>';
     }).join("");
     var m = subM();
+    /* Brochure p. 20 : on souscrit aussi pour toutes les personnes à charge, sauf si le partenaire, le cohabitant
+       ou les enfants sont déjà couverts par une assurance similaire. */
+    var missingH = S.ppl.filter(function(p,i){ return !S.sub.hospi[i] && !S.sub.cont[i] && !S.hospiElsewhere[i]; });
+    var nSubH = Object.keys(S.sub.hospi).length + Object.keys(S.sub.cont).length;
 
     return '<div class="close">'+
       '<h3>Pour qui souscrivez-vous ?<span class="anno-mark">8</span></h3>'+
-      '<p>Une formule différente par personne, c\'est possible. Continuité et Maladies graves demandent une formule active.</p>'+
+      '<p>Une formule différente par personne, c\'est possible. Hospitalia se souscrit pour toutes les personnes à charge, sauf celles déjà couvertes par une assurance hospitalisation similaire : cochez « déjà couvert ailleurs » en face de chaque personne laissée de côté, en précisant par qui. Maladies graves demande une formule Smart, Care ou Plus. Continuité est réservée à qui est assuré par son employeur : elle remplace la formule, elle ne s\'y ajoute pas.</p>'+
       '<div class="swrap"><table class="subtable"><thead><tr>'+
         '<th class="grow">Personne</th><th>Formule</th><th>Continuité</th><th>Maladies graves</th><th class="n">Par mois</th>'+
       '</tr></thead><tbody>'+rows+'</tbody><tfoot><tr>'+
         '<td colspan="4">Total hospitalisation</td><td class="n">'+eur(m.hospi+m.cont+m.mg,2)+'</td>'+
-      '</tr></tfoot></table></div></div>';
+      '</tr></tfoot></table></div>'+
+      (nSubH && missingH.length
+        ? '<div class="warn">'+esc(missingH.map(function(p){ return p.n; }).join(", "))+
+          (missingH.length>1?' ne sont pas couverts':' n\'est pas couvert')+' et aucune couverture ailleurs n\'est indiquée. '+
+          'Sans justification, la règle est de souscrire pour toutes les personnes à charge.</div>'
+        : '')+
+      (Object.keys(S.sub.cont).length
+        ? '<p style="font-size:12px;color:var(--ink-2);margin:12px 0 0"><b>Continuité :</b> jusqu\'à 50 € par jour d\'hospitalisation, après 6 mois de stage, pour ce que l\'assurance de l\'employeur ne couvre pas — et seulement si elle est intervenue. Questionnaire médical à l\'affiliation. Quand l\'assurance collective s\'arrête, passage à Smart, Care ou Plus sans questionnaire, sans stage et sans surprime. Fin du contrat à 66 ans (67 ans à partir de 2030).</p>'
+        : '')+
+    '</div>';
   }
 
   function subPanelD(){
@@ -1641,7 +1894,7 @@
     var m = subM();
     var rows = S.ppl.map(function(p,i){
       var cur = S.sub.hospi[i] || "", contP = pC(p.age);
-      var line = (cur?pH(cur,p.age):0) + (S.sub.cont[i]&&contP?contP:0) + (S.sub.mg[i]?MG_PRIME:0) + (S.sub.dent[i]?pD(p.age):0);
+      var line = (cur?pH(cur,p.age):0) + (S.sub.cont[i]&&contP?contP:0) + (S.sub.mg[i]?pMG(p.age):0) + (S.sub.dent[i]?pD(p.age):0);
       return '<tr>'+
         '<td class="grow"><b>'+esc(p.n)+'</b><br><span style="font-size:11px;color:var(--muted)">'+p.age+' ans · '+(p.h?"titulaire":"à charge")+'</span></td>'+
         '<td><span class="mini">'+
@@ -1649,9 +1902,9 @@
           PLANS.map(function(k){
             var ok = planOkFor(k,p.age);
             return '<button type="button" data-subh="'+i+'" data-v="'+k+'" aria-pressed="'+(cur===k?"true":"false")+'"'+(ok?"":" disabled")+'>'+esc(HOSPI[k].l.replace("Hospitalia ",""))+'</button>';
-          }).join("")+'</span></td>'+
-        '<td><button type="button" class="sw" data-subc="'+i+'" aria-pressed="'+(S.sub.cont[i]?"true":"false")+'" aria-label="Continuité" '+(cur?"":"disabled")+'></button></td>'+
-        '<td><button type="button" class="sw" data-subm="'+i+'" aria-pressed="'+(S.sub.mg[i]?"true":"false")+'" aria-label="Maladies graves" '+(cur?"":"disabled")+'></button></td>'+
+          }).join("")+'</span>'+(cur ? '' : elseCtl(i))+'</td>'+
+        '<td>'+contCell(i,p)+'</td>'+
+        '<td><button type="button" class="sw" data-subm="'+i+'" aria-pressed="'+(S.sub.mg[i]?"true":"false")+'" aria-label="Maladies graves" '+((cur && mgOk(p.age))?"":"disabled")+'></button></td>'+
         '<td><button type="button" class="sw" data-subd="'+i+'" aria-pressed="'+(S.sub.dent[i]?"true":"false")+'" aria-label="Dentalia"'+(dentOk(p.age)?"":" disabled")+'></button></td>'+
         '<td class="n"><b>'+eur(line,2)+'</b></td>'+
       '</tr>';
@@ -1670,10 +1923,11 @@
       '<div class="panel">'+
         '<span class="lbl">Ce qui n\'est pas couvert<span class="anno-mark">4</span></span>'+
         '<ul style="margin:8px 0 0;padding-left:18px;font-size:12.5px;color:var(--ink-2);line-height:1.8">'+
-          '<li>Stage d\'attente de 3 mois sur Hospitalia ; de 0 à 12 mois sur Dentalia selon la garantie</li>'+
+          '<li>Stage d\'attente de 3 mois sur Hospitalia (6 mois sur Continuité) ; de 0 à 12 mois sur Dentalia selon la garantie</li>'+
+          (Object.keys(S.sub.cont).length ? '<li>Hospitalia Continuité rembourse au plus 50 € par jour d\'hospitalisation, et seulement ce que l\'assurance de l\'employeur n\'a pas couvert — si elle est intervenue. Elle prend fin à 66 ans (67 ans à partir de 2030) ou dès que l\'assurance collective s\'arrête</li>' : '')+
           '<li>Affections et soins antérieurs à l\'affiliation</li>'+
           '<li>La prime monte par tranche d\'âge, pour Hospitalia comme pour Dentalia</li>'+
-          '<li>Hospitalia Care et Plus ne sont plus souscriptibles au-delà de 67 ans</li>'+
+          '<li>Hospitalia Care et Plus ne sont plus souscriptibles au-delà de 67 ans (sauf transfert depuis une assurance mutualiste similaire) ; la Garantie Maladies graves non plus</li>'+
           '<li>La Garantie Maladies graves n\'intervient qu\'en Belgique, et le diagnostic doit être postérieur à la souscription</li>'+
           (Object.keys(S.sub.hospi).some(function(i){ return S.sub.hospi[i]==="plus"; }) ? '<li>Une franchise annuelle est possible dans certains hôpitaux avec Hospitalia Plus</li>' : '')+
         '</ul>'+
@@ -1691,7 +1945,7 @@
       ["Vous signez votre affiliation","en agence, en ligne ou par courrier. Une seule signature."],
       ["Nous ouvrons votre dossier","carte d'identité et attestation de votre situation. <span class=\"est\">Liste exacte à confirmer.</span>"],
       ["Vous recevez vos vignettes et votre accès en ligne","vos droits à l'assurance obligatoire sont ouverts."],
-      ["Les assurances démarrent après leur stage","3 mois pour Hospitalia ; de 0 à 12 mois pour Dentalia selon la garantie."]
+      ["Les assurances démarrent après leur stage","3 mois pour Hospitalia (6 mois pour Continuité) ; de 0 à 12 mois pour Dentalia selon la garantie."]
     ] : [
       ["Vous signez, chez vous ou ici","une seule signature. Nous nous occupons du reste."],
       ["Nous prévenons votre mutualité actuelle","aucun courrier de votre côté. C'est gratuit et vous ne résiliez rien."],
@@ -1707,7 +1961,7 @@
       if(S.sub.dent[i]) bits.push("Dentalia");
       var contP = pC(p.age);
       var line = (S.sub.hospi[i]?pH(S.sub.hospi[i],p.age):0) + (S.sub.cont[i]&&contP?contP:0) +
-                 (S.sub.mg[i]?MG_PRIME:0) + (S.sub.dent[i]?pD(p.age):0);
+                 (S.sub.mg[i]?pMG(p.age):0) + (S.sub.dent[i]?pD(p.age):0);
       return '<tr><td>'+esc(p.n)+'</td><td style="font-size:12px;color:var(--ink-2)">'+(bits.length?esc(bits.join(" · ")):"aucune assurance")+'</td>'+
              '<td class="n">'+eur(line,2)+'</td></tr>';
     }).join("");
@@ -1715,6 +1969,7 @@
     return ''+
     '<h2>Ce que vous payez, ce que vous obtenez<span class="anno-mark">1</span></h2>'+
     '<p class="sub">Trois choses distinctes, volontairement pas additionnées : votre budget, ce que vous récupérez chaque année, et ce contre quoi vous êtes couvert.</p>'+
+    advBy()+
     '<div class="balance">'+
       '<div class="bal">'+
         '<span class="lbl">Ce que vous payez</span>'+
@@ -1759,9 +2014,8 @@
           ' · '+AV.filter(isPicked).length+' avantage'+(AV.filter(isPicked).length>1?'s':'')+' retenu'+(AV.filter(isPicked).length>1?'s':'')+'</p>'+
         '<div class="tw" style="max-height:none"><table><thead><tr><th class="grow">Personne</th><th>Assurances</th><th class="n">Par mois</th></tr></thead><tbody>'+subRows+'</tbody></table></div>'+
         '<div style="display:flex;gap:14px;align-items:center;margin-top:18px;border-top:1px solid var(--line-soft);padding-top:16px;flex-wrap:wrap">'+
-          '<div class="cross" style="width:76px;height:76px;flex:0 0 auto"></div>'+
           '<div style="flex:1 1 180px"><div style="font-size:13.5px;font-weight:500">Emportez ce récapitulatif</div>'+
-          '<div style="font-size:12px;color:var(--ink-2)">Scannez le code, ou téléchargez-le pour l\'imprimer.<span class="anno-mark">5</span></div>'+
+          '<div style="font-size:12px;color:var(--ink-2)">Téléchargez-le pour l\'imprimer.<span class="anno-mark">5</span></div>'+
           '<button type="button" class="btn" id="pdfBtn" style="margin-top:10px">Télécharger en PDF</button></div>'+
         '</div>'+
         '<div class="yearnote">'+
@@ -1898,7 +2152,7 @@
       if((S.sel[av.id]||[]).length === el.length) delete S.sel[av.id]; else S.sel[av.id] = el.slice();
       return render();
     }
-    if(t.dataset.who){ S.who = t.dataset.who; return render(); }
+    if(t.dataset.who){ S.who = (S.who === t.dataset.who ? "all" : t.dataset.who); return render(); }
     if(t.dataset.cat){ S.cat = t.dataset.cat; return render(); }
     if(t.dataset.state){ S.state = t.dataset.state; return render(); }
 
@@ -1932,7 +2186,8 @@
     if(t.dataset.none){
       if(t.dataset.none === "H"){ S.closeH = "none"; S.sub.hospi = {}; S.sub.cont = {}; S.sub.mg = {}; }
       else { S.closeD = "none"; S.sub.dent = {}; }
-      return render();
+      /* « Continuer sans assurance » fait ce qu'il dit : le refus est noté et on passe à l'étape suivante. */
+      return goStep(S.step + 1);
     }
     if(t.dataset.reopen){
       if(t.dataset.reopen === "H") S.closeH = null; else S.closeD = null;
@@ -1942,19 +2197,37 @@
     /* souscriptions */
     if(t.dataset.subh !== undefined){
       var pi = +t.dataset.subh, v = t.dataset.v;
-      if(!v){ delete S.sub.hospi[pi]; delete S.sub.cont[pi]; delete S.sub.mg[pi]; }
-      else if(planOkFor(v, S.ppl[pi].age)) S.sub.hospi[pi] = v;
+      if(!v){ delete S.sub.hospi[pi]; delete S.sub.mg[pi]; }
+      else if(planOkFor(v, S.ppl[pi].age)){ S.sub.hospi[pi] = v; delete S.sub.cont[pi]; delete S.hospiElsewhere[pi]; }
       S.closeH = "open";
       return render();
     }
     if(t.dataset.subc !== undefined){
       var ci = +t.dataset.subc;
-      if(S.sub.cont[ci]) delete S.sub.cont[ci]; else if(S.sub.hospi[ci]) S.sub.cont[ci] = true;
+      if(S.sub.cont[ci]) delete S.sub.cont[ci];
+      else if(S.hospiElsewhere[ci] === "employer" && contOk(S.ppl[ci].age)){
+        /* Continuité remplace la formule : on retire Smart, Care ou Plus (et Maladies graves, qui en dépend). */
+        S.sub.cont[ci] = true; delete S.sub.hospi[ci]; delete S.sub.mg[ci];
+      }
+      S.closeH = "open";
+      return render();
+    }
+    if(t.dataset.hospisrc !== undefined){
+      var srcI = +t.dataset.hospisrc;
+      S.hospiElsewhere[srcI] = t.dataset.v;
+      if(t.dataset.v !== "employer") delete S.sub.cont[srcI];
+      S.closeH = "open";
       return render();
     }
     if(t.dataset.subm !== undefined){
       var mi = +t.dataset.subm;
-      if(S.sub.mg[mi]) delete S.sub.mg[mi]; else if(S.sub.hospi[mi]) S.sub.mg[mi] = true;
+      if(S.sub.mg[mi]) delete S.sub.mg[mi]; else if(S.sub.hospi[mi] && mgOk(S.ppl[mi].age)) S.sub.mg[mi] = true;
+      return render();
+    }
+    if(t.dataset.hospielse !== undefined){
+      var hi = +t.dataset.hospielse;
+      if(S.hospiElsewhere[hi]){ delete S.hospiElsewhere[hi]; delete S.sub.cont[hi]; } else S.hospiElsewhere[hi] = true;
+      S.closeH = "open";
       return render();
     }
     if(t.dataset.subd !== undefined){
@@ -2025,6 +2298,20 @@
       return render();
     }
   });
+
+  /* Nom du conseiller : saisi une fois, mémorisé sur ce poste */
+  (function(){
+    var inp = document.getElementById("advisorName");
+    try{ S.advisor = localStorage.getItem(ADV_KEY) || ""; }catch(err){ S.advisor = ""; }
+    inp.value = S.advisor;
+    inp.addEventListener("input", function(){
+      S.advisor = inp.value;
+      try{ localStorage.setItem(ADV_KEY, advName()); }catch(err){}
+      syncAdvisor();
+    });
+    inp.addEventListener("keydown", function(e){ if(e.key === "Enter") inp.blur(); });
+    syncAdvisor();
+  })();
 
   render();
 })();
